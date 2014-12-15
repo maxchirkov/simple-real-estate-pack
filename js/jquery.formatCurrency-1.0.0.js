@@ -1,0 +1,16 @@
+﻿//  This file is part of the jQuery formatCurrency Plugin.
+//
+//    The jQuery formatCurrency Plugin is free software: you can redistribute it
+//    and/or modify it under the terms of the GNU General Public License as published
+//    by the Free Software Foundation, either version 3 of the License, or
+//    (at your option) any later version.
+
+//    The jQuery formatCurrency Plugin is distributed in the hope that it will
+//    be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+//    of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//    GNU General Public License for more details.
+//
+//    You should have received a copy of the GNU General Public License along with
+//    the jQuery formatCurrency Plugin.  If not, see <http://www.gnu.org/licenses/>.
+
+(function(a){function c(a){switch(a.toLowerCase()){case"int":return"Int";case"float":return"Float";default:throw"invalid parseType"}}function b(b){var c=a.formatCurrency.regions[b];if(c){return c}else{if(/(\w+)-(\w+)/g.test(b)){var d=b.replace(/(\w+)-(\w+)/g,"$1");return a.formatCurrency.regions[d]}}return null}a.formatCurrency={};a.formatCurrency.regions=[];a.formatCurrency.regions[""]={symbol:"$",positiveFormat:"%s%n",negativeFormat:"(%s%n)",decimalSymbol:".",digitGroupSymbol:",",groupDigits:true};a.fn.formatCurrency=function(c,d){if(arguments.length==1&&typeof c!=="string"){d=c;c=false}var e={name:"formatCurrency",colorize:false,region:"",global:true};e=a.extend(e,a.formatCurrency.regions[""]);d=a.extend(e,d);if(d.region.length>0){d=a.extend(d,b(d.region))}return this.each(function(){$this=a(this);var b="0";b=$this[$this.is("input, select, textarea")?"val":"html"]();var e=new RegExp("[^\\d"+d.decimalSymbol+"-]","g");b=b.replace(e,"");if(d.decimalSymbol!=".")b=b.replace(d.decimalSymbol,".");if(isNaN(b))b="0";var f=b==(b=Math.abs(b));b=Math.floor(b*100);var g=b%100;b=Math.floor(b/100).toString();if(g<10)g="0"+g;if(d.groupDigits){for(var h=0;h<Math.floor((b.length-(1+h))/3);h++){b=b.substring(0,b.length-(4*h+3))+d.digitGroupSymbol+b.substring(b.length-(4*h+3))}}if(!d.dropDecimals){b=b+d.decimalSymbol+g}var i=f?d.positiveFormat:d.negativeFormat;var j=i.replace(/%s/g,d.symbol);j=j.replace(/%n/g,b);if(!c){c=$this}else{c=a(c)}c[c.is("input, select, textarea")?"val":"html"](j);if(d.colorize)c.css("color",f?"black":"red")})};a.fn.toNumber=function(c){var d=a.extend({name:"toNumber",region:"",global:true},a.formatCurrency.regions[""]);c=jQuery.extend(d,c);if(c.region.length>0){c=a.extend(c,b(c.region))}return this.each(function(){var b=a(this).is("input, select, textarea")?"val":"html";var d=new RegExp("[^\\d"+c.decimalSymbol+"-]","g");a(this)[b](a(this)[b]().replace(d,""))})};a.fn.asNumber=function(d){var e=a.extend({name:"asNumber",region:"",parse:true,parseType:"Float",global:true},a.formatCurrency.regions[""]);d=jQuery.extend(e,d);if(d.region.length>0){d=a.extend(d,b(d.region))}d.parseType=c(d.parseType);var f=a(this).is("input, select, textarea")?"val":"html";var g=new RegExp("[^\\d"+d.decimalSymbol+"-]","g");var h=a(this)[f]().replace(g,"");if(!d.parse)return h;if(h.length==0)h="0";if(d.decimalSymbol!=".")h=h.replace(d.decimalSymbol,".");return window["parse"+d.parseType](h)}})(jQuery)
