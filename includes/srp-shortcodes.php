@@ -263,9 +263,10 @@ function srp_profile_shortcode($atts=array(), $content = NULL) {
 
   global $srp_property_values;
   $srp_property_values = $args;
+    var_dump($args);
   //check if shortcode is for GMap
-  if( !isset($args['extended']) && isset($args['gmap']) ){
-    return srp_map($args['lat'], $args['lng'], $args['html'], $args['width'], $args['height']) . str_replace('%ajax_js%', '', srp_listing_values_js() );
+  if( !isset($args['extended']) ){
+//    return srp_map($args['lat'], $args['lng'], $args['html'], @$args['width'], @$args['height']) . str_replace('%ajax_js%', '', srp_listing_values_js() );
   }
 
   $output = srp_buffer('srp_profile');

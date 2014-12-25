@@ -1,7 +1,7 @@
 /* Tabs
 ----------------------------------*/
-#srp-tab-wrap.ui-tabs { padding: 0;}
-#srp-tab-wrap.ui-tabs .ui-tabs-nav {
+.srp-tabs.ui-tabs { padding: 0;}
+.srp-tabs.ui-tabs .ui-tabs-nav {
 	list-style: none;
 	position: relative;
 	padding: .2em .2em 0 0;
@@ -11,13 +11,13 @@
         line-height: normal;
         display: block;
 }
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li:before, #srp-tab-wrap.ui-tabs .ui-tabs-nav li:before {
+.srp-tabs.ui-tabs .ui-tabs-nav li:before, .srp-tabs.ui-tabs .ui-tabs-nav li:before {
     content: ""!important;
 }
 
 /*adding extra "body" selector line to assure third party themes don't override our tabs in an undesired way */
-body #srp-tab-wrap.ui-tabs .ui-tabs-nav li,
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li {
+body .srp-tabs.ui-tabs .ui-tabs-nav li,
+.srp-tabs.ui-tabs .ui-tabs-nav li {
 	float: left;
 	margin: 0 0.4em 0 0;
 	padding: 0;
@@ -43,23 +43,23 @@ body #srp-tab-wrap.ui-tabs .ui-tabs-nav li,
 
 	border-bottom: none;
 	}
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li:before {
+.srp-tabs.ui-tabs .ui-tabs-nav li:before {
 	content: inherit;
 	padding: 0;
 	margin: 0;
 }
 
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li:hover, #srp-tab-wrap.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+.srp-tabs.ui-tabs .ui-tabs-nav li:hover, .srp-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
 	background: #E5EEF7;
 	border-color: #B1BCD6;
 	}
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li a { display: block; text-decoration: none; padding: 0.5em; }
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li.ui-tabs-selected { }
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, #srp-tab-wrap.ui-tabs .ui-tabs-nav li.ui-state-disabled a, #srp-tab-wrap.ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text;}
-#srp-tab-wrap.ui-tabs .ui-tabs-nav li a, #srp-tab-wrap.ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; white-space:nowrap;} /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
-#srp-tab-wrap.ui-tabs .ui-tabs-panel { padding: 0; display: block; border-width: 0; background: none; }
-#srp-tab-wrap.ui-tabs-panel { margin-bottom: 1.5em;}
-#srp-tab-wrap.ui-tabs .ui-tabs-hide {
+.srp-tabs.ui-tabs .ui-tabs-nav li a { display: block; text-decoration: none; padding: 0.5em; }
+.srp-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected { }
+.srp-tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .srp-tabs.ui-tabs .ui-tabs-nav li.ui-state-disabled a, .srp-tabs.ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text;}
+.srp-tabs.ui-tabs .ui-tabs-nav li a, .srp-tabs.ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; white-space:nowrap;} /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.srp-tabs.ui-tabs .ui-tabs-panel { padding: 0; display: block; border-width: 0; background: none; }
+.srp-tabs.ui-tabs-panel { margin-bottom: 1.5em;}
+.srp-tabs.ui-tabs .ui-tabs-hide {
     position: absolute;
     left: -10000px;
     width: 100%;

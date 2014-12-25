@@ -37,9 +37,11 @@ function srp_MortgageRates_options_page(){
 						  <th scope="row"><div align="right">Sate <em>(optional)</em>: </div></th>
 						  <td>
 						  <?php
-								$srp_getratesummary_state = $srp_mortgage_rates['getratesummary_state'];
-									
+								$output = '';
+						  		$srp_getratesummary_state = $srp_mortgage_rates['getratesummary_state'];
 								$states = srp_get_states();
+
+
 								foreach($states as $k=>$v){
 									if($srp_getratesummary_state == $k){ $selected = ' selected '; }else{ $selected = ''; }
 									$output .= "\t" . '<option value="' . $k . '"' . $selected . '>' . $v . '</option>' . "\n";

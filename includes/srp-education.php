@@ -315,7 +315,7 @@ function srp_tabs_byType($args = array(), $ajax = NULL){
 
 		//add disclaimer to the footer
 		add_action('srp_footer_disclaimers', 'srp_Education_disclaimer');
-		$output = '<div class="srp-tabs">' . srp_Education_attribution($school->city, $school->state) . "\n" . $tabs . $$args['output'] . '</div>' . "\n";
+		$output = '<div id="srp-tab-wrap" class="srp-tabs">' . srp_Education_attribution($school->city, $school->state) . "\n" . $tabs . $$args['output'] . '</div>' . "\n";
 		if($ajax){
 			$content = $output;
 			return serialize(array('markers' => $coordinates));//, 'content' => $content));

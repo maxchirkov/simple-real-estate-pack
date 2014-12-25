@@ -113,16 +113,22 @@ function srp_general_options_page() {
             <h3 class="hndle"><span>Available ShortCodes</span></h3>
             <div class="inside">
               <?php
+
               global $shortcode_atts;
+
               foreach ($shortcode_atts as $name => $options) {
-                $required = $options['required'];
-                $optional = $options['optional'];
-                $description = $options['description'];
+                $required = (isset($options['required'])) ? $options['required'] : null;
+                $optional = (isset($options['optional'])) ? $options['optional'] : null;
+                $description = (isset($options['description'])) ? $options['description'] : null;
+
                 unset($optional['return']);
                 unset($closingtag);
                 $title = $optional['title'];
+
                 if ($name == 'srpmap') {
                   $closingtag = ' Location description. [/' . $name . ']';
+                } else {
+                    $closingtag = null;
                 }
 
                 echo '<h4>' . $title . ':</h4>';

@@ -1,7 +1,7 @@
 <?php
 Class srpWidgets{
 
-    static $widgets = array();
+    public $widgets = array();
 
     function __construct(){}
 
@@ -89,7 +89,7 @@ Class srpWidgets{
     function get_all_ajax($ajax){
         global $srp_ext_gre_content, $srp_ext_gre_tabs;
 
-        if(count($this->widgets) < 1)
+        if(count($this->widgets) < 1 || empty($srp_ext_gre_content))
                 return;
         foreach($this->widgets as $widget){
             if(in_array($widget->name, $srp_ext_gre_content)){
@@ -173,7 +173,7 @@ Class srpWidgets{
     function get_tabs(){
         global $srp_ext_gre_content, $srp_ext_gre_tabs;
 
-        if(count($this->widgets) < 1)
+        if(count($this->widgets) < 1 || empty($srp_ext_gre_content))
                 return;
 
         $tabs = false;

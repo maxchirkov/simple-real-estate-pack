@@ -64,7 +64,7 @@ API key is no longer required in API version 3
                                                 </tr>
 -->                                             <tr valign="bottom">
 						  <th scope="row"><div align="right">Main Marker Legend: </div></th>
-						  <td><input type="checkbox" name="srp_gmap[mainmarker]" <?php if($srp_gmap['mainmarker']){ echo 'checked'; }?>/>
+						  <td><input type="checkbox" name="srp_gmap[mainmarker]" <?php if (isset($srp_gmap['mainmarker'])){ echo 'checked'; }?>/>
 							 Show Main Marker icon in the legend below the map.
 							</td>
 						</tr>

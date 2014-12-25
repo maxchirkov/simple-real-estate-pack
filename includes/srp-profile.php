@@ -141,6 +141,8 @@ if (function_exists('greatrealestate_init')) {
 function srp_profile($args = array()) {
   global $srp_general_options, $srp_widgets, $srp_property_values, $srp_ext_gre_content, $srp_scripts;
 
+    wp_enqueue_script( 'google-maps-api-v3' );
+
   if (count($srp_property_values) < 6)
     return;
 
@@ -154,7 +156,7 @@ function srp_profile($args = array()) {
       $args['ajax'] = $srp_general_options['content']['srp_profile_ajax'];
     }
   }
-
+var_dump($args);
   srp_prepare_widgets_object();
 //var_dump($srp_widgets);
   $js_func = 'srp_profile';
@@ -192,7 +194,7 @@ function srp_profile($args = array()) {
   } elseif ( isset($args['ajax']) ) {
 
     $widgets = $srp_widgets->widgets;
-    if( is_array($widgets) && !empty($widgets) ){
+    if( is_array($widgets) && !empty($widgets) && !empty($srp_ext_gre_content)){
       foreach ($widgets as $widget) {
         if ($widget->ajax == true) {
           if (in_array($widget->name, $srp_ext_gre_content)) {
@@ -202,7 +204,7 @@ function srp_profile($args = array()) {
       }
     }
 
-    if (is_array($callbacks)) {
+    if (isset($callbacks)) {
 
       //check if any functions exist that use 3rd party APIs and require desclamers in the footer
       /*
@@ -228,7 +230,7 @@ function srp_profile($args = array()) {
   }
 
   $content .= '</div>';
-
+var_dump($content);
   echo str_replace('%ajax_js%', $ajax_js, $nonajax_js);
   echo $content;
 }
