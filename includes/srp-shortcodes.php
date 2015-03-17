@@ -231,9 +231,23 @@ function srp_walkscore_shortcode($atts=array()) {
 
 function srp_profile_shortcode($atts=array(), $content = NULL) {
   //removing empty attributes
-  $atts = array_filter($atts);
+//    $atts = array_filter($atts);
 
-    $args = shortcode_atts(srp_merge_atts('srp_profile'), $atts);
+    if (!isset($atts['gmap']))
+    {
+        $args = shortcode_atts(srp_merge_atts('srp_profile'), $atts);
+    }
+    else if (isset($atts['gmap']) && $atts['gmap'] == 1 &&
+        isset($atts['extended']) && $atts['extended'] == true)
+    {
+        $args = shortcode_atts(srp_merge_atts('srp_profile'), $atts);
+
+    }
+    else
+    {
+        $args = $atts;
+    }
+
   //add address instead of description if none provided
   if( isset($args['address']) || isset($args['city']) ){
     $address = $args['address'] . ', ' . $args['city'] . ' ' . $args['state'] . ' ' . $args['zip_code'];
@@ -248,8 +262,14 @@ function srp_profile_shortcode($atts=array(), $content = NULL) {
     }
   }
 
-  if( isset($args['title']) )
-    $title = sprintf( '<div class="srp-map-location-title" style="font-size: 1.2em;"><b>%s</b></div>', addslashes($args['title']) );
+  if (isset($args['title']))
+  {
+      $title = sprintf( '<div class="srp-map-location-title" style="font-size: 1.2em;"><b>%s</b></div>', addslashes($args['title']) );
+  }
+    else
+    {
+        $title = null;
+    }
 
   if( $content ){
     // WP 3.3.1 - I'm so tired of WP adding dangling <p> tags into shortcodes
@@ -265,11 +285,13 @@ function srp_profile_shortcode($atts=array(), $content = NULL) {
   $srp_property_values = $args;
 
   //check if shortcode is for GMap
-  if( !isset($args['extended']) ){
-//    return srp_map($args['lat'], $args['lng'], $args['html'], @$args['width'], @$args['height']) . str_replace('%ajax_js%', '', srp_listing_values_js() );
+  if (isset($args['extended']) && $args['extended'] == false)
+  {
+      return srp_map($args['lat'], $args['lng'], $args['html'], @$args['width'], @$args['height']) . str_replace('%ajax_js%', '', srp_listing_values_js() );
   }
 
   $output = srp_buffer('srp_profile');
+
   return $output;
 }
 
