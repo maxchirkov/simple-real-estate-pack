@@ -15,19 +15,32 @@ class srp_MortgageCalc extends WP_Widget {
 		global $srp_scripts;
 		$srp_scripts = true;
 
-		extract($args);
+        $width = null;
+        $interest_rate = null;
 
-    //check widget-related variables
-    //since we allow to embed widgets into content where these vars don't exist
-    $before_title = ( isset($before_title) ) ? $before_title : '';
-    $after_title = ( isset($after_title) ) ? $after_title : '';
-    $before_widget = ( isset($before_widget) ) ? $before_widget : '';
-    $after_widget = ( isset($after_widget) ) ? $after_widget : '';
+        extract($args);
+
+        $price_of_home = (isset($instance['price_of_home']) && !empty($instance['price_of_home'])) ? $instance['price_of_home'] : null;
+        $down_payment = (isset($instance['down_payment']) && !empty($instance['down_payment'])) ? $instance['down_payment'] : null;
+        $mortgage_term = (isset($instance['mortgage_term']) && !empty($instance['mortgage_term'])) ? $instance['mortgage_term'] : null;
+
+        //check widget-related variables
+        //since we allow to embed widgets into content where these vars don't exist
+        $before_title = ( isset($before_title) ) ? $before_title : '';
+        $after_title = ( isset($after_title) ) ? $after_title : '';
+        $before_widget = ( isset($before_widget) ) ? $before_widget : '';
+        $after_widget = ( isset($after_widget) ) ? $after_widget : '';
 
 		$title = apply_filters('srp_MortgageCalc', empty($instance['title']) ? '' : $instance['title']);
 		if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
-		$interest_rate = ( isset($interest_rate) ) ? $interest_rate : srp_get_option('annual_interest_rate', $instance['interest_rate']);
-		if($instance['width']){ $width = 'style="width:'.$instance['width'].'px"'; }
+
+        $interest_rate = ( $interest_rate ) ?
+                            $interest_rate :
+                            (isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ?
+                                srp_get_option('annual_interest_rate', $instance['interest_rate']) :
+                                null;
+
+        if(isset($instance['width']) && !empty($instance['width'])){ $width = 'style="width:'.$instance['width'].'px"'; }
 
                 if(!$options = get_option('srp_mortgage_calc_options')){
                     $options = _default_settings_MortgageCalc();
@@ -38,17 +51,17 @@ class srp_MortgageCalc extends WP_Widget {
 				  <tr>
 					<td><label>Price of Home </label></td>
 					<td>$</td>
-					<td><input id="' . $this->get_field_id('price_of_home') . '" class="currency" name="' . $this->get_field_name('price_of_home') . '" type="text" size="8" value="'.$instance['price_of_home'].'"></td>
+					<td><input id="' . $this->get_field_id('price_of_home') . '" class="currency" name="' . $this->get_field_name('price_of_home') . '" type="text" size="8" value="'.$price_of_home.'"></td>
 				  </tr>
 				  <tr>
 					<td><label>Down Payment </label></td>
 					<td>&nbsp;</td>
-					<td><input id="' . $this->get_field_id('down_payment') . '" name="' . $this->get_field_name('down_payment') . '" type="text" size="8" value="'.$instance['down_payment'].'">%</td>
+					<td><input id="' . $this->get_field_id('down_payment') . '" name="' . $this->get_field_name('down_payment') . '" type="text" size="8" value="'.$down_payment.'">%</td>
 				  </tr>
 				  <tr>
 					<td><label>Mortgage Term </label></td>
 					<td>&nbsp;</td>
-					<td><input id="' . $this->get_field_id('mortgage_term') . '" name="' . $this->get_field_name('mortgage_term') . '" type="text" size="8" value="' . ($instance['mortgage_term'] ? $instance['mortgage_term'] : $options['mortgage_term']) . '">yrs</td>
+					<td><input id="' . $this->get_field_id('mortgage_term') . '" name="' . $this->get_field_name('mortgage_term') . '" type="text" size="8" value="' . $mortgage_term . '">yrs</td>
 				  </tr>
 				  <tr>
 					<td><label>Interest Rate </label></td>
@@ -75,7 +88,7 @@ class srp_MortgageCalc extends WP_Widget {
                             $output .= '<input id="home_insurance_rate" name="home_insurance_rate" type="hidden"  value="'.$options['home_insurance_rate'].'">';
                             $output .= '<input id="pmi" name="pmi" type="hidden"  value="'.$options['pmi'].'">' . $after_widget;
 
-		if($instance['return'] == true){
+		if(isset($instance['return']) && $instance['return'] == true){
 			return $output;
 		}else{
 			echo $output;
@@ -118,18 +131,26 @@ class srp_AffordabilityCalc extends WP_Widget {
 
 		extract($args);
 
-    //check widget-related variables
-    //since we allow to embed widgets into content where these vars don't exist
-    $before_title = ( isset($before_title) ) ? $before_title : '';
-    $after_title = ( isset($after_title) ) ? $after_title : '';
-    $before_widget = ( isset($before_widget) ) ? $before_widget : '';
-    $after_widget = ( isset($after_widget) ) ? $after_widget : '';
+        //check widget-related variables
+        //since we allow to embed widgets into content where these vars don't exist
+        $before_title = ( isset($before_title) ) ? $before_title : '';
+        $after_title = ( isset($after_title) ) ? $after_title : '';
+        $before_widget = ( isset($before_widget) ) ? $before_widget : '';
+        $after_widget = ( isset($after_widget) ) ? $after_widget : '';
+
+        $width = isset($width) ? $width : null;
 
 		$title = apply_filters('srp_AffordabilityCalc', empty($instance['title']) ? '' : $instance['title']);
-		if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
-		if($instance['width']){ $width = 'style="width:'.$instance['width'].'px"'; }
 
-                $interest_rate = srp_get_option('annual_interest_rate', $instance['interest_rate']);
+        if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
+
+        if(isset($instance['width']) && !empty($instance['width']))
+        {
+            $width = 'style="width:'.$instance['width'].'px"';
+        }
+
+                $_rate = (isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ? $instance['interest_rate'] : null;
+                $interest_rate = srp_get_option('annual_interest_rate', $_rate);
 
                 if(!$options = get_option('srp_mortgage_calc_options')){
                     $options = _default_settings_MortgageCalc();
@@ -184,9 +205,13 @@ class srp_AffordabilityCalc extends WP_Widget {
 			$output = apply_filters('widget', $output);
 			$output .='</td></tr></table></div>
 		' . $after_widget;
-		if($instance['return'] == true){
+
+        if (isset($instance['return']) && $instance['return'] == true)
+        {
 			return $output;
-		}else{
+		}
+        else
+        {
 			echo $output;
 		}
 	}
@@ -223,7 +248,10 @@ class srp_ClosingCosts extends WP_Widget {
 		global $srp_scripts;
 		$srp_scripts = true;
 
+        $width = null;
+
 		extract($args);
+
 		$title = apply_filters('srp_ClosingCosts', empty($instance['title']) ? '' : $instance['title']);
     if( isset($instance['text']) )
       $text = apply_filters( 'srp_ClosingCosts', $instance['text'] );
@@ -235,8 +263,12 @@ class srp_ClosingCosts extends WP_Widget {
     $before_widget = ( isset($before_widget) ) ? $before_widget : '';
     $after_widget = ( isset($after_widget) ) ? $after_widget : '';
 
+    $loan_amount = (isset($instance['loan_amount']) && !empty($instance['loan_amount'])) ? $instance['loan_amount'] : null;
+
+
 		if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
-		if($instance['width']){ $width = 'style="width:'.$instance['width'].'px"'; }
+
+        if (isset($instance['width']) && !empty($instance['width'])){ $width = 'style="width:'.$instance['width'].'px"'; }
 
                 if(!$options = get_option('srp_mortgage_calc_options')){
                     $options = _default_settings_MortgageCalc();
@@ -251,7 +283,7 @@ class srp_ClosingCosts extends WP_Widget {
 					  <tr>
 						<td>Loan Amount</td>
 						<td>$</td>
-						<td><input id="' . $this->get_field_id('loan_amount') . '" name="' . $this->get_field_name('loan_amount') . '" value="'. $instance['loan_amount'] .'" type="text" size="8"></td>
+						<td><input id="' . $this->get_field_id('loan_amount') . '" name="' . $this->get_field_name('loan_amount') . '" value="'. $loan_amount .'" type="text" size="8"></td>
 					  </tr>
 					  <tr>
 					  	<td colspan="3">
@@ -333,9 +365,12 @@ class srp_ClosingCosts extends WP_Widget {
 			</div>
 		' . $after_widget;
 
-		if($instance['return'] == true){
+		if (isset($instance['return']) && $instance['return'] == true)
+        {
 			return $output;
-		}else{
+		}
+        else
+        {
 			echo $output;
 		}
 	}
@@ -376,20 +411,29 @@ class srp_MortgageRates extends WP_Widget {
 
 		extract($args);
 
-    //check widget-related variables
-    //since we allow to embed widgets into content where these vars don't exist
-    $before_title = ( isset($before_title) ) ? $before_title : '';
-    $after_title = ( isset($after_title) ) ? $after_title : '';
-    $before_widget = ( isset($before_widget) ) ? $before_widget : '';
-    $after_widget = ( isset($after_widget) ) ? $after_widget : '';
+        //check widget-related variables
+        //since we allow to embed widgets into content where these vars don't exist
+        $before_title = ( isset($before_title) ) ? $before_title : '';
+        $after_title = ( isset($after_title) ) ? $after_title : '';
+        $before_widget = ( isset($before_widget) ) ? $before_widget : '';
+        $after_widget = ( isset($after_widget) ) ? $after_widget : '';
+
+        $width = (isset($width)) ? $width : null;
 
 		$title = apply_filters('srp_MortgageRates', empty($instance['title']) ? '' : $instance['title']);
-		if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
-		if($instance['width']){ $width = $instance['width'] . 'px'; }
-		$output = $before_widget . $title . srp_get_zillow_mortgage_rates(false, $width) . $after_widget;
-		if($instance['return'] == true){
+
+        if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
+
+        if (isset($instance['width']) && !empty($instance['width']))
+        {
+            $width = $instance['width'] . 'px';
+        }
+
+        $output = $before_widget . $title . srp_get_zillow_mortgage_rates(false, $width) . $after_widget;
+
+        if (isset($instance['return']) && $instance['return'] == true){
 			return $output;
-		}else{
+		} else {
 			echo $output;
 		}
 	}

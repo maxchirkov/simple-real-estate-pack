@@ -156,7 +156,7 @@ function srp_profile($args = array()) {
       $args['ajax'] = $srp_general_options['content']['srp_profile_ajax'];
     }
   }
-var_dump($args);
+
   srp_prepare_widgets_object();
 //var_dump($srp_widgets);
   $js_func = 'srp_profile';
@@ -230,7 +230,7 @@ var_dump($args);
   }
 
   $content .= '</div>';
-var_dump($content);
+
   echo str_replace('%ajax_js%', $ajax_js, $nonajax_js);
   echo $content;
 }

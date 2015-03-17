@@ -5,6 +5,7 @@ function srp_gmap_options(){
 	$disabled = "disabled";
 	$note = 'Currently the <a href="' . ADMIN_URL . '/admin.php?page=greatrealestate-options">Great Real Estate plugin\'s</a> Google API key is being used. If you disable that plugin, you will need to re-enter the API key here.';
   }else{
+      $disabled = null;
 	$g_api = get_option('srp_gmap_api_key');
 	$note = 'Paste your domain\'s <a title="get a Google API key" href="http://code.google.com/apis/maps/signup.html">Google API key</a> here to enable maps.';
   }
@@ -59,7 +60,7 @@ API key is no longer required in API version 3
 						<tr valign="bottom">
 						  <th scope="row"><div align="right">Google Map Search: </div></th>
 						  <td>
-                                                        <input type="checkbox" name="srp_gmap[search]" <?php if($srp_gmap['search']){ echo 'checked'; }?>/>
+                                                        <input type="checkbox" name="srp_gmap[search]" <?php if(isset($srp_gmap['search'])){ echo 'checked'; }?>/>
                                                   </td>
                                                 </tr>
 -->                                             <tr valign="bottom">

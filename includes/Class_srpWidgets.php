@@ -1,6 +1,7 @@
 <?php
-Class srpWidgets{
 
+class srpWidgets
+{
     public $widgets = array();
 
     function __construct(){}
@@ -22,7 +23,7 @@ Class srpWidgets{
       extract( $merged_atts, EXTR_REFS );
 
       //$name is required
-      if( NULL == $name )
+      if ( NULL == $name )
         return;
 
       $this->widgets[$name] = new srpWidget($name, $title, $tab_name, $content, $callback_function, $init_function, $ajax, $save_to_buffer);
