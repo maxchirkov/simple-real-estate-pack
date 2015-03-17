@@ -49,7 +49,12 @@ function _check_required_values() {
 if (!$srp_ext_gre_options = get_option('srp_ext_gre_options'))
   return;
 
+
+
+
 $srp_ext_gre_content = array_keys($srp_ext_gre_options['content']);
+
+
 $srp_ext_gre_tabs = $srp_ext_gre_options['tabs'];
 $srp_general_options = get_option('srp_general_options');
 

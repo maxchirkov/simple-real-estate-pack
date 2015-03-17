@@ -171,7 +171,7 @@ function srp_map($lat, $lng, $html=null, $width = NULL, $height = NULL) {
 	   </div>
 	   <div class="srp_gre_legend">';
         if( isset($srp_gmap_options['mainmarker']) ){
-            $output .= '<span><img src="http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" /> - ' . $srp_gmap_options['mainmarker_label'] . '</span>';
+            $output .= '<span><img src="//www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png" /> - ' . $srp_gmap_options['mainmarker_label'] . '</span>';
         }
         $output .= '</div>
 	</div>';
@@ -208,7 +208,7 @@ function srp_admin_scripts(){
     }
 
     wp_enqueue_script('jquery');
-    $googlepath = "http://maps.google.com/maps/api/js?sensor=true";
+    $googlepath = "//maps.google.com/maps/api/js?sensor=true";
     wp_enqueue_script( 'google-maps-api-v3', $googlepath, FALSE, false, false );
     $srp_gre_admin = SRP_URL.'/js/srp-gre-admin.js';
     wp_enqueue_script('srp-gre-admin', $srp_gre_admin, false, false, false);
@@ -218,16 +218,16 @@ function srp_default_headScripts(){
 
 	wp_enqueue_script('jquery');
   add_thickbox();
-  $googlepath = "http://maps.google.com/maps/api/js?sensor=true";
+  $googlepath = "//maps.google.com/maps/api/js?sensor=true";
 	wp_register_script( 'google-maps-api-v3', $googlepath, FALSE, false, false );
     if(function_exists('greatrealestate_init')){
         remove_action( 'wp_enqueue_scripts', 'greatrealestate_add_javascript' );
     }
 
     wp_register_script('srp-jsmin', SRP_URL . '/js/jsmin.js', array('jquery'), '1.0', true);
-    wp_register_script('srp', SRP_URL . '/js/srp.js', array('jquery'), '1.0', true);
-    wp_register_script('srp-calcs', SRP_URL . '/js/srp-MortgageCalc.js', array('jquery', 'srp', 'srp-currency'), '1.0', true);
-    wp_register_script('srp-currency', SRP_URL . '/js/jquery.formatCurrency-1.0.0.js', array('jquery'), '1.0', true);
+    wp_register_script('srp', SRP_URL . '/js/srp.min.js', array('jquery'), '1.0', true);
+    wp_register_script('srp-calcs', SRP_URL . '/js/srp-MortgageCalc.min.js', array('jquery', 'srp', 'srp-currency'), '1.0', true);
+    wp_register_script('srp-currency', SRP_URL . '/js/jquery.formatCurrency-1.0.0.min.js', array('jquery'), '1.0', true);
     //Pass JS vars so they can be used in a global scope
     wp_localize_script( 'srp', 'srp', srp_ajax_vars() );
 }
@@ -238,7 +238,7 @@ function srp_register_header_styles(){
   $myStyleUrl		= SRP_URL . '/css/srp.css';
   $myStyleFile	= SRP_DIR . '/css/srp.css';
   if ( file_exists($myStyleFile) ) {
-      wp_register_style('srp', $myStyleUrl, array(), false, 'screen');
+      wp_register_style('srp', $myStyleUrl, array(), null, 'screen');
       wp_enqueue_style('srp');
   }
 
@@ -247,7 +247,7 @@ function srp_register_header_styles(){
 	$srp_general_options = get_option('srp_general_options');
 	$srp_ext_gre_options = get_option('srp_ext_gre_options');
 	if($srp_general_options['content']['srp_gre_css'] || $srp_ext_gre_options['content']['srp_gre_css']  && file_exists($uitabsFile)){
-            wp_register_style('srp_uitabs', $uitabsStyle, array(), false, 'screen');
+            wp_register_style('srp_uitabs', $uitabsStyle, array(), null, 'screen');
             wp_enqueue_style('srp_uitabs');
 	}
 
