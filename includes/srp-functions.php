@@ -246,7 +246,7 @@ function srp_register_header_styles(){
 	$uitabsFile		= SRP_DIR . '/css/ui.tabs.css';
 	$srp_general_options = get_option('srp_general_options');
 	$srp_ext_gre_options = get_option('srp_ext_gre_options');
-	if($srp_general_options['content']['srp_gre_css'] || $srp_ext_gre_options['content']['srp_gre_css']  && file_exists($uitabsFile)){
+	if(isset($srp_general_options['content']['srp_gre_css']) || isset($srp_ext_gre_options['content']['srp_gre_css'])  && file_exists($uitabsFile)){
             wp_register_style('srp_uitabs', $uitabsStyle, array(), null, 'screen');
             wp_enqueue_style('srp_uitabs');
 	}
@@ -270,7 +270,7 @@ function srp_footer_scripts(){
         return;
 
     $srp_general_options = get_option('srp_general_options');
-    if($srp_general_options['content']['srp_profile_tabs']){
+    if(isset($srp_general_options['content']['srp_profile_tabs'])){
         wp_enqueue_script('jquery-ui');
         wp_enqueue_script('jquery-ui-tabs');
     }

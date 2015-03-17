@@ -517,7 +517,10 @@ function srp_profile_tabs(x){
 		srp_refresh_tabs(".srp-tabs");
         }
 
-function srp_refresh_tabs(selector){
-    if( jQuery(selector).length > 0 )
-	   jQuery(selector).tabs();
+function srp_refresh_tabs(selector)
+{
+    if (jQuery(selector).length && jQuery.fn.tabs)
+    {
+        jQuery(selector).tabs();
+    }
 }

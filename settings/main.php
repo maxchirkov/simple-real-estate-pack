@@ -91,7 +91,7 @@ function srp_general_options_page() {
                     ?>
                     <tr valign="bottom">
                       <th scope="row"><div align="right"><?php echo $default_options['content'][$k]['name']; ?>: </div></th>
-                    <td><input type="checkbox" name="srp_general_options[content][<?php echo $k; ?>]" <?php if ($options['content'][$k]) {
+                    <td><input type="checkbox" name="srp_general_options[content][<?php echo $k; ?>]" <?php if (isset($options['content'][$k])) {
                   echo 'checked';
                 } ?>/>
     <?php echo $default_options['content'][$k]['notes']; ?>

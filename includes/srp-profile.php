@@ -160,7 +160,7 @@ function srp_profile($args = array()) {
   srp_prepare_widgets_object();
 //var_dump($srp_widgets);
   $js_func = 'srp_profile';
-  $content = '<div id="srp-tab-wrap">';
+  $content = '<div id="srp-tab-wrap" class="srp-tabs">';
 
   //Load Tabs
   if ( isset($args['tabs']) ) {

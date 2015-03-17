@@ -27,7 +27,7 @@ gulp.task('sass', function (){
     gulp.src('scss/*.scss')                    // Build Our Stylesheet
         .pipe(sass({style: 'compressed', errLogToConsole: true, sourceComments: 'map',
                            sourceMap: 'sass'}))  // Compile scss
-        .pipe(rename({suffix: '.min'}))                              // Rename it
+        //.pipe(rename({suffix: '.min'}))                              // Rename it
         .pipe(minifycss())                                         // Minify the CSS
         .pipe(header(banner, { pkg : pkg }))
         .pipe(gulp.dest('css'));                            // Set the destination to assets/css
