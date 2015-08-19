@@ -8,7 +8,7 @@ class srp_MortgageCalc extends WP_Widget {
 	function srp_MortgageCalc() {
 		$widget_ops = array('classname' => 'srp_MortgageCalc', 'description' => __('Mortgage Calculator Widget'));
 		$control_ops = array('width' => 280);
-		$this->WP_Widget('srp_MortgageCalc', __('[SRP] Mortgage Calculator'), $widget_ops, $control_ops);
+		parent::__construct('srp_MortgageCalc', __('[SRP] Mortgage Calculator'), $widget_ops, $control_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -122,7 +122,7 @@ class srp_AffordabilityCalc extends WP_Widget {
 	function srp_AffordabilityCalc() {
 		$widget_ops = array('classname' => 'srp_AffordabilityCalc', 'description' => __('Affordability Calculator Widget'));
 		$control_ops = array('width' => 280);
-		$this->WP_Widget('srp_AffordabilityCalc', __('[SRP] Affordability Calculator'), $widget_ops, $control_ops);
+		parent::__construct('srp_AffordabilityCalc', __('[SRP] Affordability Calculator'), $widget_ops, $control_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -241,7 +241,7 @@ class srp_ClosingCosts extends WP_Widget {
 	function srp_ClosingCosts() {
 		$widget_ops = array('classname' => 'srp_ClosingCosts', 'description' => __('Closing Cost Estimator'));
 		$control_ops = array('width' => 280);
-		$this->WP_Widget('srp_ClosingCosts', __('[SRP] Closing Cost Estimator'), $widget_ops, $control_ops);
+		parent::__construct('srp_ClosingCosts', __('[SRP] Closing Cost Estimator'), $widget_ops, $control_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -402,7 +402,7 @@ class srp_MortgageRates extends WP_Widget {
 	function srp_MortgageRates() {
 		$widget_ops = array('classname' => 'srp_MortgageRates', 'description' => __('Mortgage Rates by Zillow'));
 		$control_ops = array('width' => 280);
-		$this->WP_Widget('srp_MortgageRates', __('[SRP] Mortgage Rates'), $widget_ops, $control_ops);
+		parent::__construct('srp_MortgageRates', __('[SRP] Mortgage Rates'), $widget_ops, $control_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -555,7 +555,7 @@ class srp_RentMeter extends WP_Widget {
 	function srp_RentMeter() {
 		$widget_ops = array('classname' => 'srp_RentMeter', 'description' => __('Rental Rates Meter by Rentometer.com'));
 		$control_ops = array('width' => 280);
-		$this->WP_Widget('srp_RentMeter', __('[SRP] Rental Rates Meter'), $widget_ops, $control_ops);
+		parent::__construct('srp_RentMeter', __('[SRP] Rental Rates Meter'), $widget_ops, $control_ops);
 	}
 
 	function widget( $args, $instance ) {
@@ -643,4 +643,3 @@ if($mortgage_rates_options['getratesummary_api_key']){
 if(get_option('srp_rentometer_api_key')){
 	add_action('widgets_init', create_function('', 'return register_widget("srp_RentMeter");'));
 }
-?>
