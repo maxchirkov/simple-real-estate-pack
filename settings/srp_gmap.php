@@ -51,7 +51,7 @@ API key is no longer required in API version 3
 -->
 						<tr valign="bottom">
 						  <th scope="row"><div align="right">Mapping options from Yelp: </div></th>
-						  <td><input type="checkbox" name="srp_gmap[yelp]" <?php if($srp_gmap['yelp']){ echo 'checked'; }?>/>
+						  <td><input type="checkbox" name="srp_gmap[yelp]" <?php if(isset($srp_gmap['yelp']) && !empty($srp_gmap['yelp'])){ echo 'checked'; }?>/>
 							 <a href="<?php echo ADMIN_URL;?>/admin.php?page=srp_yelp">Yelp API key</a> is required.
                                                          <br/>A box with options like Schools, Grocery Stores, Hospitals etc. will be added to your Google Maps.
 							</td>
@@ -60,18 +60,18 @@ API key is no longer required in API version 3
 						<tr valign="bottom">
 						  <th scope="row"><div align="right">Google Map Search: </div></th>
 						  <td>
-                                                        <input type="checkbox" name="srp_gmap[search]" <?php if(isset($srp_gmap['search'])){ echo 'checked'; }?>/>
+                                                        <input type="checkbox" name="srp_gmap[search]" <?php if(isset($srp_gmap['search']) && !empty($srp_gmap['search'])){ echo 'checked'; }?>/>
                                                   </td>
                                                 </tr>
 -->                                             <tr valign="bottom">
 						  <th scope="row"><div align="right">Main Marker Legend: </div></th>
-						  <td><input type="checkbox" name="srp_gmap[mainmarker]" <?php if (isset($srp_gmap['mainmarker'])){ echo 'checked'; }?>/>
+						  <td><input type="checkbox" name="srp_gmap[mainmarker]" <?php if (isset($srp_gmap['mainmarker']) && !empty($srp_gmap['mainmarker'])){ echo 'checked'; }?>/>
 							 Show Main Marker icon in the legend below the map.
 							</td>
 						</tr>
                                                 <tr valign="bottom">
 						  <th scope="row"><div align="right">Main Marker Label: </div></th>
-						  <td><input type="text" name="srp_gmap[mainmarker_label]" value="<?php echo $srp_gmap['mainmarker_label'];?>" />
+						  <td><input type="text" name="srp_gmap[mainmarker_label]" value="<?php echo (isset($srp_gmap['mainmarker_label'])) ? $srp_gmap['mainmarker_label'] : '';?>" />
 							</td>
 						</tr>
 					  </table>

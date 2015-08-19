@@ -236,7 +236,7 @@ function srp_tabs_byType($args = array(), $ajax = NULL){
 			$td_distance_header = '<th scope="col" class="school_field_center">Distance (mi)</th>';
 		}
 		$$args['output'] .= "<h3>$name Schools $in $location</h3>";
-		if($distance){
+		if(isset($distance)){
 			$$args['output'] .= "<p class='schools-found'>$total $name Schools found within $distance miles radius.</p>\n";
 		}else{
 			$$args['output'] .= "<p class='schools-found'>$total $name Schools found in the area.</p>\n";

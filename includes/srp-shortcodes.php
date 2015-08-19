@@ -299,7 +299,7 @@ add_shortcode('mortgage', 'srp_MortgageCalc_shortcode');
 add_shortcode('affordability', 'srp_AffordabilityCalc_shortcode');
 add_shortcode('closingcosts', 'srp_ClosingCosts_shortcode');
 add_shortcode('mortgage_rates', 'srp_MortgageRates_shortcode');
-add_shortcode('rentmeter', 'srp_RentMeter_shortcode');
+//add_shortcode('rentmeter', 'srp_RentMeter_shortcode');
 add_shortcode('schoolsearch', 'srp_schoolSearch_shortcode');
 add_shortcode('yelp', 'srp_Yelp_shortcode');
 add_shortcode('srpmap', 'srp_map_shortcode');

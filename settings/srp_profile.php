@@ -183,7 +183,7 @@ function srp_profile_options_page() {
                   ?>
                   <tr valign="bottom">
                     <th scope="row"><div align="right"><?php echo $default_options['content'][$k]['name']; ?>: </div></th>
-                  <td><input type="checkbox" name="srp_ext_gre_options[content][<?php echo $k; ?>]" <?php if ($options['content'][$k]) {
+                  <td><input type="checkbox" name="srp_ext_gre_options[content][<?php echo $k; ?>]" <?php if (isset($options['content'][$k])) {
                   echo 'checked';
                 } ?>/>
                   <?php echo $default_options['content'][$k]['notes']; ?>
@@ -216,11 +216,11 @@ function srp_profile_options_page() {
               <table class="form-table" style="width: 650px">
                 <tr valign="bottom">
                   <th><div align="right">Businesses(Yelp) within Radius</div></th>
-                <td><input type="text" name="srp_ext_gre_options[radius][yelp]" value="<?php echo $options['radius']['yelp']; ?>" size="5"/>mi</td>
+                <td><input type="text" name="srp_ext_gre_options[radius][yelp]" value="<?php echo (isset($options['radius']['yelp'])) ? $options['radius']['yelp'] : ''; ?>" size="5"/>mi</td>
                 </tr>
                 <tr valign="bottom">
                   <th><div align="right">Schools within Radius</div></th>
-                <td><input type="text" name="srp_ext_gre_options[radius][schools]" value="<?php echo $options['radius']['schools']; ?>" size="5"/>mi</td>
+                <td><input type="text" name="srp_ext_gre_options[radius][schools]" value="<?php echo (isset($options['radius']['schools'])) ? $options['radius']['schools'] : ''; ?>" size="5"/>mi</td>
                 </tr>
               </table>
 
@@ -229,11 +229,11 @@ function srp_profile_options_page() {
               <table class="form-table" style="width: 650px">
                 <tr valign="bottom">
                   <th><div align="right">Charts</div></th>
-                <td>Width <input type="text" name="srp_ext_gre_options[chart-dimensions][width]" value="<?php echo $options['chart-dimensions']['width']; ?>" size="5"/>px by Height <input type="text" name="srp_ext_gre_options[chart-dimensions][height]" value="<?php echo $options['chart-dimensions']['height']; ?>" size="5"/>px</td>
+                <td>Width <input type="text" name="srp_ext_gre_options[chart-dimensions][width]" value="<?php echo (isset($options['chart-dimensions']['width'])) ? $options['chart-dimensions']['width'] : ''; ?>" size="5"/>px by Height <input type="text" name="srp_ext_gre_options[chart-dimensions][height]" value="<?php echo (isset($options['chart-dimensions']['height'])) ? $options['chart-dimensions']['height'] : ''; ?>" size="5"/>px</td>
                 </tr>
                 <tr valign="bottom">
                   <th><div align="right">Map</div></th>
-                <td>Width <input type="text" name="srp_ext_gre_options[map-dimensions][width]" value="<?php echo $options['map-dimensions']['width']; ?>" size="5"/>%/px by Height <input type="text" name="srp_ext_gre_options[map-dimensions][height]" value="<?php echo $options['map-dimensions']['height']; ?>" size="5"/>px</td>
+                <td>Width <input type="text" name="srp_ext_gre_options[map-dimensions][width]" value="<?php echo (isset($options['map-dimensions']['height'])) ? $options['map-dimensions']['width'] : ''; ?>" size="5"/>%/px by Height <input type="text" name="srp_ext_gre_options[map-dimensions][height]" value="<?php echo (isset($options['map-dimensions']['height'])) ? $options['map-dimensions']['height'] : ''; ?>" size="5"/>px</td>
                 </tr>
               </table>
               <?php
