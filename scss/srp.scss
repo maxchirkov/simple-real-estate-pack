@@ -21,7 +21,10 @@
 
 #srp_map_canvas img, #gre_map_canvas img, #srp_map_tab{
 	max-width: none;
-        background: transparent!important;
+	background: transparent!important;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 
 #srp_map_canvas input, #srp_map_canvas textarea, #srp_map_canvas select,
