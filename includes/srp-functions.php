@@ -210,7 +210,7 @@ function srp_admin_scripts(){
     wp_enqueue_script('jquery');
     $googlepath = "//maps.google.com/maps/api/js?sensor=true";
     wp_enqueue_script( 'google-maps-api-v3', $googlepath, FALSE, false, false );
-    $srp_gre_admin = SRP_URL.'/js/srp-gre-admin.js';
+    $srp_gre_admin = SRP_URL.'/js/srp-gre-admin.min.js';
     wp_enqueue_script('srp-gre-admin', $srp_gre_admin, false, false, false);
 }
 
