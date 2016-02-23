@@ -15,37 +15,42 @@ class srp_MortgageCalc extends WP_Widget {
 		global $srp_scripts;
 		$srp_scripts = true;
 
-        $width = null;
-        $interest_rate = null;
+		$width = null;
+		$interest_rate = null;
 
-        extract($args);
+		extract($args);
 
-        $price_of_home = (isset($instance['price_of_home']) && !empty($instance['price_of_home'])) ? $instance['price_of_home'] : null;
-        $down_payment = (isset($instance['down_payment']) && !empty($instance['down_payment'])) ? $instance['down_payment'] : null;
-        $mortgage_term = (isset($instance['mortgage_term']) && !empty($instance['mortgage_term'])) ? $instance['mortgage_term'] : null;
+		if (!$options = get_option('srp_mortgage_calc_options'))
+		{
+			$options = _default_settings_MortgageCalc();
+		}
 
-        //check widget-related variables
-        //since we allow to embed widgets into content where these vars don't exist
-        $before_title = ( isset($before_title) ) ? $before_title : '';
-        $after_title = ( isset($after_title) ) ? $after_title : '';
-        $before_widget = ( isset($before_widget) ) ? $before_widget : '';
-        $after_widget = ( isset($after_widget) ) ? $after_widget : '';
+		$instance = array_merge((array)$instance, (array)$options);
+
+		$price_of_home = (isset($instance['price_of_home']) && !empty($instance['price_of_home'])) ? $instance['price_of_home'] : null;
+		$down_payment = (isset($instance['down_payment']) && !empty($instance['down_payment'])) ? $instance['down_payment'] : null;
+		$mortgage_term = (isset($instance['mortgage_term']) && !empty($instance['mortgage_term'])) ? $instance['mortgage_term'] : null;
+
+		//check widget-related variables
+		//since we allow to embed widgets into content where these vars don't exist
+		$before_title = ( isset($before_title) ) ? $before_title : '';
+		$after_title = ( isset($after_title) ) ? $after_title : '';
+		$before_widget = ( isset($before_widget) ) ? $before_widget : '';
+		$after_widget = ( isset($after_widget) ) ? $after_widget : '';
 
 		$title = apply_filters('srp_MortgageCalc', empty($instance['title']) ? '' : $instance['title']);
 		if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
 
-        $interest_rate = ( $interest_rate ) ?
-                            $interest_rate :
-                            (isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ?
-                                srp_get_option('annual_interest_rate', $instance['interest_rate']) :
-                                null;
+		$interest_rate = ( $interest_rate ) ?
+				$interest_rate :
+				(isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ?
+						srp_get_option('annual_interest_rate', $instance['interest_rate']) :
+						null;
 
-        if(isset($instance['width']) && !empty($instance['width'])){ $width = 'style="width:'.$instance['width'].'px"'; }
+		if(isset($instance['width']) && !empty($instance['width'])){ $width = 'style="width:'.$instance['width'].'px"'; }
 
-                if(!$options = get_option('srp_mortgage_calc_options')){
-                    $options = _default_settings_MortgageCalc();
-                }
-                            $output = $before_widget . $title . '
+
+		$output = $before_widget . $title . '
                             <div class="srp_MortgageCalcwidget" ' . $width . '>
 				<table class="srp_table">
 				  <tr>
