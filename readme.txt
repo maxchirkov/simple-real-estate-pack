@@ -3,8 +3,8 @@ Contributors: maxchirkov
 Donate link: https://www.cancer.org/aspx/Donation/DON_1_Donate_Online_Now.aspx
 Tags: mortgage, mortgage calculator, real estate, realty, widget, plugin, listing, AJAX, homes, neighborhood, schools, yelp, zillow, map, trulia, altos, charts, statistics, real estate market
 Requires at least: 3.0
-Tested up to: 4.3
-Stable tag: 1.4.2
+Tested up to: 4.4.2
+Stable tag: 1.4.3
 
 Package of real estate tools and widgets designed specifically for real estate industry blogs and sites.
 
@@ -215,6 +215,9 @@ Clear your browser cache and reload the page.
 **If something doesn't work, please try to troubleshoot the issue by checking is any JavaScript errors are reported. Also, try disabling other plugins and leave the SRP enabled just to make sure there are no conflicts.**
 
 == Changelog ==
+
+**Version 1.4.3**
+- Fixes: mortgage calculator widget not inheriting default settings.
 
 **Version 1.4.1**
 - WordPress 4.3 compatibility update (deprecated widget constructors).
