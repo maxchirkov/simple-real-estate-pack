@@ -30,50 +30,49 @@ function simpleRealEstatePack_menu(){
 
 function srp_show_menu() {
 	global $wp_version;
+
 	switch ($_GET["page"]) {
-	case "srp_mortgage_rates" :
-		include_once (dirname (__FILE__) . '/mortgage_rates.php');
-		srp_MortgageRates_options_page();
-		break;
+        case "srp_mortgage_rates" :
+            include_once (dirname (__FILE__) . '/mortgage_rates.php');
+            srp_MortgageRates_options_page();
+            break;
 
-	case "srp_mortgage_calc" :
-	default :
-		include_once (dirname (__FILE__) . '/mortgage_calc.php');
-		simpleMortgageCalc_options_page();
-		break;
+        case "srp_mortgage_calc" :
+            include_once (dirname (__FILE__) . '/mortgage_calc.php');
+            simpleMortgageCalc_options_page();
+            break;
 
-        //Education API Key is hardcoded - no need for the education.php
-	case "srp_education" :
-		include_once (dirname (__FILE__) . '/education.php');
-		srp_Education_options_page();
-		break;
+            //Education API Key is hardcoded - no need for the education.php
+        case "srp_education" :
+            include_once (dirname (__FILE__) . '/education.php');
+            srp_Education_options_page();
+            break;
 
-	case "srp_yelp" :
-		include_once (dirname (__FILE__) . '/yelp.php');
-		srp_Yelp_options_page();
-		break;
+        case "srp_yelp" :
+            include_once (dirname (__FILE__) . '/yelp.php');
+            srp_Yelp_options_page();
+            break;
 
-	case "srp_walkscore" :
-		include_once (dirname (__FILE__) . '/walkscore.php');
-		srp_Walkscore_options_page();
-		break;
+        case "srp_walkscore" :
+            include_once (dirname (__FILE__) . '/walkscore.php');
+            srp_Walkscore_options_page();
+            break;
 
-	case "srp_gmap" :
-		include_once (dirname (__FILE__) . '/srp_gmap.php');
-		srp_gmap_options();
-		break;
+        case "srp_gmap" :
+            include_once (dirname (__FILE__) . '/srp_gmap.php');
+            srp_gmap_options();
+            break;
 
-	case "srp_profile" :
-		include_once (dirname (__FILE__) . '/srp_profile.php');
-		srp_profile_options_page();
-		break;
+        case "srp_profile" :
+            include_once (dirname (__FILE__) . '/srp_profile.php');
+            srp_profile_options_page();
+            break;
 
-	default :
-                include_once (dirname (__FILE__) . '/main.php');
-                //srp_MainAdmin_page();
-                srp_general_options_page();
-                break;
-
+        default :
+            include_once (dirname (__FILE__) . '/main.php');
+            //srp_MainAdmin_page();
+            srp_general_options_page();
+            break;
 	}
 }
 
