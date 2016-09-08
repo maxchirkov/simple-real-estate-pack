@@ -240,6 +240,3 @@ $states .= "</select>\n";
 </form>
 </body>
 </html>
-<?php
-
-?>

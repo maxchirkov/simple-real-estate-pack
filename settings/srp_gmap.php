@@ -94,4 +94,3 @@ API key is no longer required in API version 3
   
   echo '</div>';
 }
-?>

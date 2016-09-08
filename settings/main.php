@@ -156,4 +156,3 @@ function srp_general_options_page() {
   </div>
   <?php
 }
-?>

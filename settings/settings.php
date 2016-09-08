@@ -195,4 +195,3 @@ function srp_settings_right_column(){
 	</div>';
 	return $content;
 }
-?>

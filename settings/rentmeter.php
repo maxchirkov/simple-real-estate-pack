@@ -40,4 +40,3 @@ function srp_RentMeter_options_page(){
   
   echo '</div>';
 }
-?>

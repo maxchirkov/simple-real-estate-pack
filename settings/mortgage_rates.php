@@ -93,4 +93,3 @@ function srp_MortgageRates_options_page(){
   
   echo '</div>';
 }
-?>

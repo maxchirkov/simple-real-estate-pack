@@ -188,4 +188,3 @@ if ( function_exists('get_pages_with_active_listings') ) {
 
  <?php endif;
 }
- ?>

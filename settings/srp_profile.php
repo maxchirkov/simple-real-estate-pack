@@ -272,4 +272,3 @@ function srp_profile_options_page() {
   <?php
   echo '</div>';
 }
-?>

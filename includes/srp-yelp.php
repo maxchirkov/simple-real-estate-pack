@@ -219,4 +219,3 @@ function srp_getYelp_ajax(){
 
 add_action('wp_ajax_srp_getYelp_ajax', 'srp_getYelp_ajax');
 add_action('wp_ajax_nopriv_srp_getYelp_ajax', 'srp_getYelp_ajax');
-?>

@@ -41,4 +41,3 @@ function srp_Walkscore_options_page(){
 
   echo '</div>';
 }
-?>

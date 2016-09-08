@@ -314,6 +314,3 @@ if ( !is_user_logged_in() || !current_user_can('edit_posts') )
 </form>
 </body>
 </html>
-<?php
-
-?>

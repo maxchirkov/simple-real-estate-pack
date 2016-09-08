@@ -368,5 +368,3 @@ function _schools_checkbox(){
 	return '<input id="schools_select" type="checkbox"><label for="schools_select">Schools</label><br />' . "\n";
 }
 add_filter('_add_to_yelpselect', '_schools_checkbox');
-
-?>
