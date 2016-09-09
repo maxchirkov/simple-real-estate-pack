@@ -53,7 +53,7 @@ function srp_getYelp(array $parameters)
 
     extract($parameters);
 
-    if ($term && $yelp_categories[$term])
+    if ($term && isset($yelp_categories[$term]))
     {
         $_categories = array($term => $yelp_categories[$term]);
     }
