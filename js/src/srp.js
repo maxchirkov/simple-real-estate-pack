@@ -6,7 +6,7 @@ var loadingOnMap = 0;
 var markerArray;
 markerArray = new Array();
 
-jQuery(document).ready( function() {
+jQuery(window).load( function() {
 
 	//Overriding Thickbox' tb_remove function because it breaks tabs
 	window.tb_remove = function() {
@@ -40,33 +40,32 @@ jQuery(document).ready( function() {
 	// })
 
 
-
 	if(typeof srp_listing_values != 'undefined'){
 		var n = 0;
-		function onMapsAPIload()
+		var interval;
+
+		interval = setInterval(function()
 		{
-			if (!window.google || !window.google.maps.MapTypeControlStyle)
+			if (window.google && window.google.maps)
 			{
-				if (n < 5000)
-				{
-					setTimeout(function()
-							   {
-								   n = n + 200;
-								   onMapsAPIload();
-							   }, 200);
-				}
-				else
-				{
-					console.error('SREP Maps API timed out.');
-				}
-			}
-			else
-			{
+				clearInterval(interval);
 				srp_initialize();
 			}
-		}
+			else if (n == 500)
+			{
+				// Give it half a second before loading API on our own.
+				// Not great, but somewhat solution to avoid duplicate apis
+				var apiKey = (srp.srp_gmap_key) ? srp.srp_gmap_key : '';
+				jQuery.getScript('http://maps.googleapis.com/maps/api/js?key=' + apiKey);
+			}
+			else if (n >= 5000)
+			{
+				console.error('SREP Maps API timed out.');
+				clearInterval(interval);
+			}
 
-		onMapsAPIload();
+			n = n+100;
+		}, 100);
 	}
 
 	if (typeof srp_profile_view != 'undefined')

@@ -244,13 +244,15 @@ function srp_getYelp($lat, $lng, $radius, $output = 'table', $sortby = 'distance
 function srp_yelp_select()
 {
     global $yelp_categories;
+
     $output = '<div id="yelp_select">';
-    $output .= apply_filters('_add_to_yelpselect', $output);
+    $output .= apply_filters('_add_to_yelpselect', '');
+
     foreach ($yelp_categories as $cat)
     {
         $output .= '<input id="yelp_cat_' . $cat['term'] . '" name="' . $cat['term'] . '" type="checkbox"><label for="' . $cat['term'] . '">' . $cat['name'] . '</label><br />' . "\n";
     }
-    //$output .= '<a class="poweredbysrp" href="http://wordpress.org/extend/plugins/simple-real-estate-pack/">Powered by <span>SRP</span></a>';
+
     $output .= '</div>';
 
     return $output;

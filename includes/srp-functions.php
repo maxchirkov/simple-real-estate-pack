@@ -148,7 +148,6 @@ function srp_format_phone($phone){
 */
 function srp_map($lat, $lng, $html=null, $width = NULL, $height = NULL) {
     global $srp_scripts;
-    wp_enqueue_script( 'google-maps-api-v3' );
 
 	   if($width){
            //if metrics (% or px) is not indicated - fallback to px by default.
@@ -185,18 +184,22 @@ function srp_map($lat, $lng, $html=null, $width = NULL, $height = NULL) {
 	return $output;
 }
 
+
 /*
 ** CSS and JS initialization
 */
-function srp_ajax_vars(){
-  $vars = array(
+function srp_ajax_vars()
+{
+    $srpGmap = get_option('srp_gmap');
+    return array(
       'srp_url'       => SRP_URL,
       'srp_inc'       => SRP_URL .'/includes',
       'srp_wp_admin'  => ADMIN_URL,
-      'ajaxurl'       => admin_url('admin-ajax.php')
-  );
-  return $vars;
+      'ajaxurl'       => admin_url('admin-ajax.php'),
+      'srp_gmap_key'  => isset($srpGmap['api_key']) ? $srpGmap['api_key'] : '',
+    );
 }
+
 function srp_admin_scripts(){
     if( !isset($_GET['page']) )
         return;
@@ -221,14 +224,13 @@ function srp_default_headScripts(){
 
 	wp_enqueue_script('jquery');
   add_thickbox();
-  $googlepath = "//maps.google.com/maps/api/js?sensor=true";
-	wp_register_script( 'google-maps-api-v3', $googlepath, FALSE, false, false );
+
     if(function_exists('greatrealestate_init')){
         remove_action( 'wp_enqueue_scripts', 'greatrealestate_add_javascript' );
     }
 
     wp_register_script('srp-jsmin', SRP_URL . '/js/jsmin.js', array('jquery'), '1.0', true);
-    wp_register_script('srp', SRP_URL . '/js/srp.min.js', array('jquery'), '1.0', true);
+    wp_register_script('srp', SRP_URL . '/js/src/srp.js', array('jquery'), '1.0', true);
     wp_register_script('srp-calcs', SRP_URL . '/js/srp-MortgageCalc.min.js', array('jquery', 'srp', 'srp-currency'), '1.0', true);
     wp_register_script('srp-currency', SRP_URL . '/js/jquery.formatCurrency-1.0.0.min.js', array('jquery'), '1.0', true);
     //Pass JS vars so they can be used in a global scope
