@@ -184,6 +184,8 @@ function srp_setDefaultMarker(point,description) {
 	});
 }
 
+var openedInfoWindow = null;
+
 function srp_createMarker(point,html,icon) {
 	srp_custom_icons();
 	var icon_array = custom_icons[icon];
@@ -193,7 +195,12 @@ function srp_createMarker(point,html,icon) {
 		content: html
 	});
 	google.maps.event.addListener(marker, "click", function() {
+		if (openedInfoWindow)
+		{
+			openedInfoWindow.close();
+		}
 		infowindow.open(srp_map,marker);
+		openedInfoWindow = infowindow;
 	});
 	return marker;
 }
