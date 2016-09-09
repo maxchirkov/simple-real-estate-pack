@@ -37,9 +37,21 @@ $yelp_categories = array(
     )
 );
 
-function srp_getYelp($lat, $lng, $radius, $output = 'table', $sortby = 'distance', $term = null, $num_biz_requested = null, $ajax = null)
+function srp_getYelp(array $parameters)
 {
     global $yelp_categories, $srp_scripts;
+
+    $location = null;
+    $lat = null;
+    $lng = null;
+    $radius = null;
+    $output = 'table';
+    $sortby = 'avg_rating';
+    $term = null;
+    $num_biz_requested = null;
+    $ajax = null;
+
+    extract($parameters);
 
     if ($term && $yelp_categories[$term])
     {
@@ -69,7 +81,7 @@ function srp_getYelp($lat, $lng, $radius, $output = 'table', $sortby = 'distance
             'limit'           => (intval($num_biz_requested) <= 20) ? $num_biz_requested : 20,
             'cll'             => "{$lat},{$lng}",
             'radius_filter'   => $radius / 0.621371 * 1000, // converting to meters
-            'sort'            => 2,
+            'sort'            => ($sortby == 'distance') ? 1 : 2,
         );
 
         $wrap_open = $wrap_close = '';
@@ -86,7 +98,7 @@ function srp_getYelp($lat, $lng, $radius, $output = 'table', $sortby = 'distance
         require_once(SRP_LIB . '/yelp/YelpApi.php');
         $yelpApi = new \srp\yelp\YelpApi();
 
-        $request_result = $yelpApi->search($cat['term'], '11211 N Tatum Blvd, Phoenix, AZ 85254', $args);
+        $request_result = $yelpApi->search($cat['term'], $location, $args);
 //print '<pre>';
 //        echo $request_result;
 //print '</pre>';die();
@@ -260,11 +272,7 @@ function srp_yelp_select()
 
 function srp_getYelp_ajax()
 {
-    $lat    = $_POST['lat'];
-    $lng    = $_POST['lng'];
-    $radius = $_POST['radius'];
-    $term   = $_POST['term'];
-    if ($result = srp_getYelp($lat, $lng, $radius = 3, $output = 'table', $sortby = 'distance', $term, $num_biz_requested = null, $ajax = true))
+    if ($result = srp_getYelp($_POST))
     {
         die($result);
     }
