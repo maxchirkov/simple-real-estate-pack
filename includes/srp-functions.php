@@ -163,9 +163,12 @@ function srp_map($lat, $lng, $html=null, $width = NULL, $height = NULL) {
 	  <div id="map_area" style="' . $width . $height . '">
    		<div id="gre_map_canvas" style="' . $width . $height . '"></div>';
 
-		if (get_option('srp_yelp_api_key') && $srp_gmap_options['yelp']){
-			$output .= srp_yelp_select();
-		}
+    require_once  SRP_SET . '/yelp.php';
+    $yelpSettings = new \srp_YelpSettings();
+
+    if ($srp_gmap_options['yelp'] && $yelpSettings->apiCredentialsSet()){
+        $output .= srp_yelp_select();
+    }
 
 	$output .= '<input id="srp_gre_prop_coord" type="hidden" value="' . $lat .',' . $lng . '" />
 	   </div>

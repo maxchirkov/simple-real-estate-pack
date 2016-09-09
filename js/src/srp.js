@@ -25,19 +25,19 @@ jQuery(document).ready( function() {
 			this.focus();
 		});
 
-		jQuery('input#schools_select').click(function() {
-			this.blur();
-			this.focus();
-		});
+		// jQuery('input#schools_select').click(function() {
+		// 	this.blur();
+		// 	this.focus();
+		// });
 	}
 
 	jQuery('input[id^="yelp_cat_"]').change( function() {
 		srp_requestYelp(this);
 	});
 
-	jQuery('input#schools_select').change( function() {
-		srp_requestSchools();
-	})
+	// jQuery('input#schools_select').change( function() {
+	// 	srp_requestSchools();
+	// })
 
 
 
@@ -162,6 +162,7 @@ function srp_custom_icons(){
 	var iconGasStations = _icon_array('Gas Stations', 'gas_stations.png');
 
 	custom_icons['schools'] = iconSchools;
+	custom_icons['education'] = iconSchools;
 	custom_icons['grocery'] = iconGrocery;
 	custom_icons['restaurants'] = iconRestaurants;
 	custom_icons['hospitals'] = iconHospitals;

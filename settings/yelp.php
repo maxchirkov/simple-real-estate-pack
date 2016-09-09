@@ -21,6 +21,13 @@ class srp_YelpSettings
 	}
 
 
+	function apiCredentialsSet()
+	{
+		return  ($this->consumerKey && $this->consumerSecret && $this->token && $this->tokenSecret) ?
+			true : false;
+	}
+
+
 	function optionsPage()
 	{
 		echo '<div class="wrap srp">';

@@ -1,21 +1,4 @@
 <?php
-function srp_yelp_get_api_key()
-{
-    if (function_exists('get_option'))
-    {
-        $api_key = get_option('srp_yelp_api_key');
-        if ($api_key != null)
-        {
-            return $api_key;
-        }
-    }
-}
-
-
-define('YELP_API_URL', 'http://api.yelp.com/business_review_search');
-define('YELP_API_KEY', srp_yelp_get_api_key());
-define('YELP_OUTPUT', 'json');
-
 $yelp_categories = array(
     'grocery'      => array(
         'name'     => 'Grocery Stores',
@@ -50,7 +33,7 @@ $yelp_categories = array(
     'education'    => array(
         'name'     => 'Schools',
         'category' => 'elementaryschools,highschools,preschools',
-        'term'     => null,
+        'term'     => 'education',
     )
 );
 
@@ -160,7 +143,7 @@ function srp_getYelp($lat, $lng, $radius, $output = 'table', $sortby = 'distance
                 }
                 else
                 {
-                    $image100 = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    $image100 = '<svg version="1.1" id="Layer_1" class="yelp_photo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100px" height="100px" viewBox="0 0 612 792" enable-background="new 0 0 612 792" xml:space="preserve">
 <path fill="#ABABAB" d="M43.475,382.668c-11.798,18.911-16.779,78.433-12.658,117.998c1.411,13.012,3.767,23.904,7.202,30.372
 	c4.723,8.974,12.664,14.377,21.705,14.632c5.788,0.326,9.428-0.654,118.44-35.736c0,0,48.493-15.464,48.696-15.562

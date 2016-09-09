@@ -79,6 +79,7 @@ iconGasStations.infoWindowAnchor = new GPoint(5, 1);
 
 var custom_icons = new Array();
 custom_icons['schools'] = iconSchools;
+custom_icons['education'] = iconSchools;
 custom_icons['grocery'] = iconGrocery;
 custom_icons['restaurants'] = iconRestaurants;
 custom_icons['hospitals'] = iconHospitals;
