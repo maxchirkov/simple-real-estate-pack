@@ -218,6 +218,8 @@ function srp_createMarkerCustom(point, name, address, type, ref, img) {
 	return marker;
 }
 
+var srp_map_location = null;
+
 function srp_initialize() {
 	var myOptions = {
 		zoom: 13,
@@ -234,6 +236,38 @@ function srp_initialize() {
 function srp_setupmap(){
 
 	var point = new google.maps.LatLng( srp_listing_values.lat, srp_listing_values.lng );
+	var gc = new google.maps.Geocoder();
+	var location = {lat: parseFloat(srp_listing_values.lat), lng: parseFloat(srp_listing_values.lng)};
+
+	gc.geocode({location: location}, function(results, status)
+	{
+		if (status === 'OK')
+		{
+			var address = null;
+
+			if (results[0])
+			{
+				address = results[0].formatted_address;
+			}
+			else if (results[1])
+			{
+				address = results[1].formatted_address;
+			}
+			else if (results[2])
+			{
+				address = results[2].formatted_address;
+			}
+
+			if (address)
+				srp_map_location = address.replace(', USA', '');
+
+			console.log(srp_map_location);
+
+		} else {
+			window.alert('Geocoder failed due to: ' + status);
+		}
+	});
+
 	srp_map.setCenter(point, 13);
 	srp_setDefaultMarker(point, srp_listing_values.html);
 }
@@ -301,7 +335,8 @@ function srp_requestYelp(arg){
 				action: 'srp_getYelp_ajax',
 				term:		cat,
 				lat:		coord[0],
-				lng:		coord[1]
+				lng:		coord[1],
+				location: srp_map_location
 			}, function(data){
 						srp_mapYelp(data);
 						srp_ajax_loaderStop(ajax_id);

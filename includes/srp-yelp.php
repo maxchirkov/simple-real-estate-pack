@@ -44,7 +44,7 @@ function srp_getYelp(array $parameters)
     $location = null;
     $lat = null;
     $lng = null;
-    $radius = null;
+    $radius = 5;
     $output = 'table';
     $sortby = 'avg_rating';
     $term = null;
@@ -235,6 +235,7 @@ function srp_getYelp(array $parameters)
         }
 
     }
+
     if ($ajax_output)
     {
         $srp_scripts = true;
@@ -272,7 +273,11 @@ function srp_yelp_select()
 
 function srp_getYelp_ajax()
 {
-    if ($result = srp_getYelp($_POST))
+    $args = array(
+        'ajax' => true
+    );
+
+    if ($result = srp_getYelp(array_merge($args, $_POST)))
     {
         die($result);
     }
