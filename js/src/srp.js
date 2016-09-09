@@ -1,7 +1,5 @@
-
 var srp_map;
 var custom_icons = [];
-var myOptions = [];
 var loadingOnMap = 0;
 
 //Other AJAX mapping
@@ -214,14 +212,14 @@ function srp_createMarkerCustom(point, name, address, type, ref, img) {
 }
 
 function srp_initialize() {
-	myOptions = {
+	var myOptions = {
 		zoom: 13,
 		mapTypeControl: true,
 		mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
 		navigationControl: true,
 		navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
 		mapTypeId: google.maps.MapTypeId.ROADMAP
-	}
+	};
 	srp_map = new google.maps.Map(document.getElementById("gre_map_canvas"), myOptions);
 	srp_setupmap();
 }
@@ -231,7 +229,6 @@ function srp_setupmap(){
 	var point = new google.maps.LatLng( srp_listing_values.lat, srp_listing_values.lng );
 	srp_map.setCenter(point, 13);
 	srp_setDefaultMarker(point, srp_listing_values.html);
-
 }
 
 function srp_addOverlay(marker){

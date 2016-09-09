@@ -9,7 +9,7 @@ function srp_options_init(){
     register_setting('srp-gre-extension-options', 'srp_ext_gre_options');
     register_setting('srp-mortgage-rates-options', 'srp_mortgage_rates');
     register_setting('srp-rentometer-options', 'srp_rentometer_api_key');
-    register_setting('srp-yelp-options', 'srp_yelp_api_key');
+    register_setting('srp-yelp-options', 'srp_yelp_options');
     register_setting('srp-walkscore-options', 'srp_walkscore_api_key');
     register_setting('srp-education-options', 'srp_education_api_key');
     register_setting('srp-mortgage-calc-options', 'srp_mortgage_calc_options');
