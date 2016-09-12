@@ -19,7 +19,7 @@
 				ed.windowManager.open({
 					file : ajaxurl + '?action=srp_tinymce&plugin=apis_window',
 					width : 380 + ed.getLang('srp_APIs.delta_width', 0),
-					height : 365 + ed.getLang('srp_APIs.delta_height', 0),
+					height : 495 + ed.getLang('srp_APIs.delta_height', 0),
 					inline : 1
 				}, {
 					plugin_url : url // Plugin absolute URL
