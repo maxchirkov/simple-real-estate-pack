@@ -25,7 +25,7 @@ function srp_geocode(){
 }
 
 function srp_geocode_test(lat, lng){
-		var test = '<a href="http://maps.google.com/maps?hl=en&q=' + lat + ' ' + lng + '" target="_blank">Check if location is correct</a>';
+		var test = '<a href="http://maps.google.com/maps?hl=en&q=' + lat + ' ' + lng + '" target="_blank">Preview Location</a>';
 		jQuery('#test_geo_link').html(test);
 		jQuery("#listings_latitude").triggerHandler("focus");
 	}

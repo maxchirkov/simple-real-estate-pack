@@ -545,4 +545,3 @@ function srp_walkscore_content_init($init) {
 }
 
 add_filter('srp_prepare_widgets_object', 'srp_walkscore_content_init');
-?>

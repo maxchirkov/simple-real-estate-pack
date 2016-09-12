@@ -1,14 +1,12 @@
-
 var srp_map;
 var custom_icons = [];
-var myOptions = [];
 var loadingOnMap = 0;
 
 //Other AJAX mapping
 var markerArray;
 markerArray = new Array();
 
-jQuery(document).ready( function() {
+jQuery(window).load( function() {
 
 	//Overriding Thickbox' tb_remove function because it breaks tabs
 	window.tb_remove = function() {
@@ -27,48 +25,47 @@ jQuery(document).ready( function() {
 			this.focus();
 		});
 
-		jQuery('input#schools_select').click(function() {
-			this.blur();
-			this.focus();
-		});
+		// jQuery('input#schools_select').click(function() {
+		// 	this.blur();
+		// 	this.focus();
+		// });
 	}
 
 	jQuery('input[id^="yelp_cat_"]').change( function() {
 		srp_requestYelp(this);
 	});
 
-	jQuery('input#schools_select').change( function() {
-		srp_requestSchools();
-	})
-
+	// jQuery('input#schools_select').change( function() {
+	// 	srp_requestSchools();
+	// })
 
 
 	if(typeof srp_listing_values != 'undefined'){
 		var n = 0;
-		function onMapsAPIload()
+		var interval;
+
+		interval = setInterval(function()
 		{
-			if (!window.google || !window.google.maps.MapTypeControlStyle)
+			if (window.google && window.google.maps)
 			{
-				if (n < 5000)
-				{
-					setTimeout(function()
-							   {
-								   n = n + 200;
-								   onMapsAPIload();
-							   }, 200);
-				}
-				else
-				{
-					console.error('SREP Maps API timed out.');
-				}
-			}
-			else
-			{
+				clearInterval(interval);
 				srp_initialize();
 			}
-		}
+			else if (n == 500)
+			{
+				// Give it half a second before loading API on our own.
+				// Not great, but somewhat solution to avoid duplicate apis
+				var apiKey = (srp.srp_gmap_key) ? srp.srp_gmap_key : '';
+				jQuery.getScript('http://maps.googleapis.com/maps/api/js?key=' + apiKey);
+			}
+			else if (n >= 5000)
+			{
+				console.error('SREP Maps API timed out.');
+				clearInterval(interval);
+			}
 
-		onMapsAPIload();
+			n = n+100;
+		}, 100);
 	}
 
 	if (typeof srp_profile_view != 'undefined')
@@ -164,6 +161,7 @@ function srp_custom_icons(){
 	var iconGasStations = _icon_array('Gas Stations', 'gas_stations.png');
 
 	custom_icons['schools'] = iconSchools;
+	custom_icons['education'] = iconSchools;
 	custom_icons['grocery'] = iconGrocery;
 	custom_icons['restaurants'] = iconRestaurants;
 	custom_icons['hospitals'] = iconHospitals;
@@ -186,6 +184,8 @@ function srp_setDefaultMarker(point,description) {
 	});
 }
 
+var openedInfoWindow = null;
+
 function srp_createMarker(point,html,icon) {
 	srp_custom_icons();
 	var icon_array = custom_icons[icon];
@@ -195,7 +195,12 @@ function srp_createMarker(point,html,icon) {
 		content: html
 	});
 	google.maps.event.addListener(marker, "click", function() {
+		if (openedInfoWindow)
+		{
+			openedInfoWindow.close();
+		}
 		infowindow.open(srp_map,marker);
+		openedInfoWindow = infowindow;
 	});
 	return marker;
 }
@@ -213,15 +218,17 @@ function srp_createMarkerCustom(point, name, address, type, ref, img) {
 	return marker;
 }
 
+var srp_map_location = null;
+
 function srp_initialize() {
-	myOptions = {
+	var myOptions = {
 		zoom: 13,
 		mapTypeControl: true,
 		mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
 		navigationControl: true,
 		navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
 		mapTypeId: google.maps.MapTypeId.ROADMAP
-	}
+	};
 	srp_map = new google.maps.Map(document.getElementById("gre_map_canvas"), myOptions);
 	srp_setupmap();
 }
@@ -229,9 +236,40 @@ function srp_initialize() {
 function srp_setupmap(){
 
 	var point = new google.maps.LatLng( srp_listing_values.lat, srp_listing_values.lng );
+	var gc = new google.maps.Geocoder();
+	var location = {lat: parseFloat(srp_listing_values.lat), lng: parseFloat(srp_listing_values.lng)};
+
+	gc.geocode({location: location}, function(results, status)
+	{
+		if (status === 'OK')
+		{
+			var address = null;
+
+			if (results[0])
+			{
+				address = results[0].formatted_address;
+			}
+			else if (results[1])
+			{
+				address = results[1].formatted_address;
+			}
+			else if (results[2])
+			{
+				address = results[2].formatted_address;
+			}
+
+			if (address)
+				srp_map_location = address.replace(', USA', '');
+
+			console.log(srp_map_location);
+
+		} else {
+			window.alert('Geocoder failed due to: ' + status);
+		}
+	});
+
 	srp_map.setCenter(point, 13);
 	srp_setDefaultMarker(point, srp_listing_values.html);
-
 }
 
 function srp_addOverlay(marker){
@@ -297,7 +335,8 @@ function srp_requestYelp(arg){
 				action: 'srp_getYelp_ajax',
 				term:		cat,
 				lat:		coord[0],
-				lng:		coord[1]
+				lng:		coord[1],
+				location: srp_map_location
 			}, function(data){
 						srp_mapYelp(data);
 						srp_ajax_loaderStop(ajax_id);

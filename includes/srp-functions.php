@@ -148,7 +148,6 @@ function srp_format_phone($phone){
 */
 function srp_map($lat, $lng, $html=null, $width = NULL, $height = NULL) {
     global $srp_scripts;
-    wp_enqueue_script( 'google-maps-api-v3' );
 
 	   if($width){
            //if metrics (% or px) is not indicated - fallback to px by default.
@@ -163,9 +162,12 @@ function srp_map($lat, $lng, $html=null, $width = NULL, $height = NULL) {
 	  <div id="map_area" style="' . $width . $height . '">
    		<div id="gre_map_canvas" style="' . $width . $height . '"></div>';
 
-		if (get_option('srp_yelp_api_key') && $srp_gmap_options['yelp']){
-			$output .= srp_yelp_select();
-		}
+    require_once  SRP_SET . '/yelp.php';
+    $yelpSettings = new \srp_YelpSettings();
+
+    if ($srp_gmap_options['yelp'] && $yelpSettings->apiCredentialsSet()){
+        $output .= srp_yelp_select();
+    }
 
 	$output .= '<input id="srp_gre_prop_coord" type="hidden" value="' . $lat .',' . $lng . '" />
 	   </div>
@@ -182,18 +184,22 @@ function srp_map($lat, $lng, $html=null, $width = NULL, $height = NULL) {
 	return $output;
 }
 
+
 /*
 ** CSS and JS initialization
 */
-function srp_ajax_vars(){
-  $vars = array(
+function srp_ajax_vars()
+{
+    $srpGmap = get_option('srp_gmap');
+    return array(
       'srp_url'       => SRP_URL,
       'srp_inc'       => SRP_URL .'/includes',
       'srp_wp_admin'  => ADMIN_URL,
-      'ajaxurl'       => admin_url('admin-ajax.php')
-  );
-  return $vars;
+      'ajaxurl'       => admin_url('admin-ajax.php'),
+      'srp_gmap_key'  => isset($srpGmap['api_key']) ? $srpGmap['api_key'] : '',
+    );
 }
+
 function srp_admin_scripts(){
     if( !isset($_GET['page']) )
         return;
@@ -218,8 +224,7 @@ function srp_default_headScripts(){
 
 	wp_enqueue_script('jquery');
   add_thickbox();
-  $googlepath = "//maps.google.com/maps/api/js?sensor=true";
-	wp_register_script( 'google-maps-api-v3', $googlepath, FALSE, false, false );
+
     if(function_exists('greatrealestate_init')){
         remove_action( 'wp_enqueue_scripts', 'greatrealestate_add_javascript' );
     }

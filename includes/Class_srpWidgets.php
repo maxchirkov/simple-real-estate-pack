@@ -228,4 +228,3 @@ Class srpTab{
         $this->tab = $before . '<a href="#srp_'. $name . '_tab" title="'.__($title, 'simplerealestatepack') . '"><span>' . __($tab_name, 'simplerealestatepack') . '</span></a>' . $after;
     }
 }
-?>

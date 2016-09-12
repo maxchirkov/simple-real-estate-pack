@@ -142,4 +142,3 @@ function get_interest_factor($year_term, $monthly_interest_rate) {
 }
 
 print $output;
-?>

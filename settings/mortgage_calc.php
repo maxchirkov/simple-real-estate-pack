@@ -123,4 +123,3 @@ function simpleMortgageCalc_options_page() {
   echo srp_settings_right_column();
   echo '</div>';
 }
-?>

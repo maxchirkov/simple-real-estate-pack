@@ -281,6 +281,3 @@ foreach($rollingaverage as $k => $v){
 </form>
 </body>
 </html>
-<?php
-
-?>

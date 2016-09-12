@@ -58,8 +58,8 @@ function srp_profile_options_page() {
           ),
           'schools' => array(
               'name' => 'Local Schools',
-              'notes' => null,
-              'value' => 1,
+              'notes' => 'Currently unavailable due to API deprecation from Education.com',
+              'value' => 0,
           ),
           'yelp' => array(
               'name' => 'Nearby Businesses',
@@ -272,4 +272,3 @@ function srp_profile_options_page() {
   <?php
   echo '</div>';
 }
-?>

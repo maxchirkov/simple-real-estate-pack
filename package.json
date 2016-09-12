@@ -1,26 +1,28 @@
 {
-    "name": "SimpleRealEstatePack",
-    "version": "1.4.0",
-    "homepage": "http://wordpress.org",
-    "author": {
-        "name": "Max Chirkov",
-        "email": "not.available@nomail.pls"
-    },
-    "dependencies": {
-        "gulp": "~3.8.6",
-        "gulp-livereload": "^1.3.1"
-    },
-    "devDependencies": {
-        "gulp-autoprefixer": "0.0.7",
-        "gulp-concat": "^2.2.0",
-        "gulp-imagemin": "^0.5.0",
-        "gulp-livereload": "^1.3.1",
-        "gulp-minify-css": "^0.3.4",
-        "gulp-rename": "^1.2.0",
-        "gulp-sass": "^0.7.1",
-        "gulp-size": "^0.3.0",
-        "gulp-uglify": "^0.2.1",
-        "gulp-util": "^2.2.14",
-        "gulp-header": "^1.0.5"
-    }
+  "name": "SimpleRealEstatePack",
+  "version": "1.4.4",
+  "homepage": "http://wordpress.org",
+  "author": {
+    "name": "Max Chirkov",
+    "email": "not.available@nomail.pls"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-size": "^2.1.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7"
+  },
+  "devDependencies": {
+    "gulp-autoprefixer": "*",
+    "gulp-clean-css": "*",
+    "gulp-concat": "*",
+    "gulp-header": "*",
+    "gulp-rename": "*",
+    "gulp-sass": "^2.3.2",
+    "gulp-size": "*",
+    "gulp-uglify": "*",
+    "gulp-util": "*"
+  }
 }

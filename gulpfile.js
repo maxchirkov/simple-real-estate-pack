@@ -2,7 +2,7 @@ var gulp        = require('gulp');                  // Gulp!
 
 var sass        = require('gulp-sass');             // Sass
 var prefix      = require('gulp-autoprefixer');     // Autoprefixr
-var minifycss   = require('gulp-minify-css');       // Minify CSS
+var minifycss   = require('gulp-clean-css');       // Minify CSS
 var concat      = require('gulp-concat');           // Concat files
 var uglify      = require('gulp-uglify');           // Uglify javascript
 var rename      = require('gulp-rename');           // Rename files
@@ -26,7 +26,7 @@ var banner  = ['/**<%= pkg.name %>',
 gulp.task('sass', function (){
     gulp.src('scss/*.scss')                    // Build Our Stylesheet
         .pipe(sass({style: 'compressed', errLogToConsole: true, sourceComments: 'map',
-                           sourceMap: 'sass'}))  // Compile scss
+                           sourceMap: 'scss'}))  // Compile scss
         //.pipe(rename({suffix: '.min'}))                              // Rename it
         .pipe(minifycss())                                         // Minify the CSS
         .pipe(header(banner, { pkg : pkg }))

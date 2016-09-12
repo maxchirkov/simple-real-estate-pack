@@ -70,17 +70,18 @@ Attribute <em>output</em> can have the following values: table(default), list.</
     ),
     'yelp' => array(
         'required' => array(
-            "lat" => false,
-            "lng" => false,
+            "lat"       => null,
+            "lng"       => null,
+            "location"  => null,
         ),
         'optional' => array(
-            "title" => "Yelp/Nearby Businesses",
-            "radius" => srp_get_radius('yelp'),
-            "output" => "table",
-            "sortby" => 'distance',
-            "term" => NULL,
+            "title"         => "Yelp/Nearby Businesses",
+            "radius"        => srp_get_radius('yelp'),
+            "output"        => "table",
+            "sortby"        => 'distance',
+            "term"          => null,
             "num_biz_requested" => NULL,
-            "ajax" => NULL,
+            "ajax"          => NULL,
         ),
         'description' => '<p>Attribute <em>output</em> can have the following values: table(default), list.<br />Attribute <em>sortby</em> can have the following values: distance(default), name, avg_rating.<br />
 Attribute <em>term</em> can have the following values: ' . implode(', ', array_keys($yelp_categories)) . '.</p>',
@@ -210,7 +211,7 @@ function srp_schoolSearch_shortcode($atts=array(), $ajax = false) {
 function srp_Yelp_shortcode($atts=array()) {
   unset($atts['title']);
   $args = shortcode_atts(srp_merge_atts('yelp'), $atts);
-  return srp_getYelp($args['lat'], $args['lng'], $args['radius'], $args['output'], $args['sortby'], $args['term'], $args['num_biz_requested'], $args['ajax']);
+  return srp_getYelp($args);
 }
 
 function srp_map_shortcode($atts=array(), $content = NULL) {

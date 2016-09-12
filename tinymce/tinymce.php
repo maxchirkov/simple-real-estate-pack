@@ -79,5 +79,3 @@ $calcs_tinymce_button->editor_js = 'calcs_editor_plugin.js';
 $apis_tinymce_button = new add_SRP_button();
 $apis_tinymce_button->pluginname = 'srp_APIs';
 $apis_tinymce_button->editor_js = 'apis_editor_plugin.js';
-
-?>
