@@ -230,7 +230,7 @@ function srp_default_headScripts(){
     }
 
     wp_register_script('srp-jsmin', SRP_URL . '/js/jsmin.js', array('jquery'), '1.0', true);
-    wp_register_script('srp', SRP_URL . '/js/src/srp.js', array('jquery'), '1.0', true);
+    wp_register_script('srp', SRP_URL . '/js/srp.min.js', array('jquery'), '1.0', true);
     wp_register_script('srp-calcs', SRP_URL . '/js/srp-MortgageCalc.min.js', array('jquery', 'srp', 'srp-currency'), '1.0', true);
     wp_register_script('srp-currency', SRP_URL . '/js/jquery.formatCurrency-1.0.0.min.js', array('jquery'), '1.0', true);
     //Pass JS vars so they can be used in a global scope
