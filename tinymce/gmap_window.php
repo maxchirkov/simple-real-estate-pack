@@ -35,12 +35,16 @@ $states .= "</select>\n";
 	var srp_url = "<?php echo SRP_URL?>";
 	var srp_wp_admin = "<?php echo ADMIN_URL?>";
 	//]]>
-	</script>	
+	</script>
+	<?php
+	$gmap = get_option('srp_gmap');
+	?>
 	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/jquery/jquery.js"></script>	
 	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/tinymce/utils/mctabs.js"></script>
 	<script language="javascript" type="text/javascript" src="<?php echo get_option('siteurl') ?>/wp-includes/js/tinymce/utils/form_utils.js"></script>
-	<script language="javascript" type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script language="javascript" type="text/javascript"
+			src="http://maps.google.com/maps/api/js?key=<?php echo @$gmap['api_key']; ?>"></script>
         <script language="javascript" type="text/javascript" src="<?php echo SRP_URL ?>/js/srp-gre-admin.min.js"></script>
 	<script language="javascript" type="text/javascript">
 	function init() {
