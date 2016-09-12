@@ -11,6 +11,8 @@ Package of real estate tools and widgets designed specifically for real estate i
 == Description ==
 Simple Real Estate Pack is a package of real estate tools and widgets designed specifically for real estate industry blogs and web sites. The plugin includes mortgage and home affordability calculators, closing cost estimator, live mortgage rates, Trulia and ALTOS statistical charts, local schools, business listings from Yelp and Google Maps. Optionally, Simple Real Estate Pack can function as an extension for Great Real Estate (GRE) plugin, and will add new features to the GRE if it's installed. Take a look at live example of this functionality at [ScottsdaleHomes.com](http://www.scottsdalehomes.com/properties/kierland-greens-condo/).
 
+**IMPORTANT: Schools tab in Neighborhood profile currently returns no data due to API deprecation from Education.com**
+
 **API data on businesses, schools and real estate statistics is not available outside of the US.**
 
 **Features Include:**
