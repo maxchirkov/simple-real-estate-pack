@@ -231,7 +231,7 @@ function srp_default_headScripts(){
 
     wp_register_script('srp-jsmin', SRP_URL . '/js/jsmin.js', array('jquery'), '1.0', true);
     wp_register_script('srp', SRP_URL . '/js/srp.min.js', array('jquery'), '1.0', true);
-    wp_register_script('srp-calcs', SRP_URL . '/js/srp-MortgageCalc.min.js', array('jquery', 'srp', 'srp-currency'), '1.0', true);
+    wp_register_script('srp-calcs', SRP_URL . '/js/src/srp-MortgageCalc.js', array('jquery', 'srp', 'srp-currency'), '1.0', true);
     wp_register_script('srp-currency', SRP_URL . '/js/jquery.formatCurrency-1.0.0.min.js', array('jquery'), '1.0', true);
     //Pass JS vars so they can be used in a global scope
     wp_localize_script( 'srp', 'srp', srp_ajax_vars() );
@@ -615,3 +615,36 @@ function srp_ajax_tinymce(){
     die();
 }
 add_action( 'wp_ajax_srp_tinymce', 'srp_ajax_tinymce' );
+
+
+add_action('wp_ajax_srp_getAmortizationSchedule', 'getAmortizationSchedule');
+add_action('wp_ajax_nopriv_srp_getAmortizationSchedule', 'getAmortizationSchedule');
+
+function getAmortizationSchedule()
+{
+    if (isset($_POST['params']) && !empty($_POST['params']))
+    {
+        $_REQUEST = $_POST['params'];
+        include SRP_INC . '/srp-AmmortResult.php';
+        die();
+    }
+
+    print 'Something went wrong. Failure to calculate Amortization Schedule.';
+    die();
+}
+
+add_action('wp_ajax_srp_getAffordabilityDetails', 'getAffordabilityDetails');
+add_action('wp_ajax_nopriv_srp_getAffordabilityDetails', 'getAffordabilityDetails');
+
+function getAffordabilityDetails()
+{
+    if (isset($_POST['params']) && !empty($_POST['params']))
+    {
+        $_POST = $_POST['params'];
+        include SRP_INC . '/srp-AffordabilityResult.php';
+        die();
+    }
+
+    print 'Something went wrong. Failure to calculate Amortization Schedule.';
+    die();
+}

@@ -169,11 +169,13 @@ function srp_ClosingCosts_shortcode($atts=array()) {
 }
 
 function srp_MortgageRates_shortcode($atts=array()) {
-  $args = shortcode_atts(srp_merge_atts('mortgage_rates'), $atts);
-  $instance = $args;
-  $sb = new srp_MortgageRates();
-  $sb->number = rand(100, 999);
-  return $sb->widget($args, $instance);
+
+    if (is_user_logged_in() && current_user_can('edit_pages'))
+    {
+        return '<p style="color:red">Mortgage Rates widget has deprecated due to discontinued Mortgage Rates API by Zillow. Please remove your Mortgage Rates shortcodes.</p>';
+    }
+
+    return;
 }
 
 /*
