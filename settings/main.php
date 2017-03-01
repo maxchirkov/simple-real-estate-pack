@@ -72,10 +72,9 @@ function srp_general_options_page() {
                   <li>Mortgage Calculator</li>
                   <li>Affordability Calculator</li>
                   <li>Closing Cost Estimator</li>
-                  <li>Live Mortgage Rates</li>
                   <li>Trulia & Altos Statistical Graphs </li>
                   <li>Schools</li>
-                  <li>Local Businesses via Yelp</li>
+                  <li>Local Businesses</li>
                   <li>Google Maps and more.</li>
                 </ul>
               </div>

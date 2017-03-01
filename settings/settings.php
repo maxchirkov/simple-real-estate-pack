@@ -19,8 +19,13 @@ function srp_options_init(){
 function simpleRealEstatePack_menu(){
 	add_menu_page('Simple Real Estate Pack', 'SREP Settings', 'manage_options', __FILE__, 'srp_show_menu');
 	add_submenu_page(__FILE__, 'Mortgage Calcs Options', 'Mortgage Calcs', 'manage_options', 'srp_mortgage_calc', 'srp_show_menu');
-	add_submenu_page(__FILE__, 'Mortgage Rates Options', 'Mortgage Rates', 'manage_options', 'srp_mortgage_rates', 'srp_show_menu');
-	//add_submenu_page(__FILE__, 'Education API Key Setup', 'Education', 'manage_options', 'srp_education', 'srp_show_menu');
+
+	/** Zillow has deprecated Mortgage Rates API */
+    // add_submenu_page(__FILE__, 'Mortgage Rates Options', 'Mortgage Rates', 'manage_options', 'srp_mortgage_rates', 'srp_show_menu');
+
+    /** Education.com has deprecated its API */
+	// add_submenu_page(__FILE__, 'Education API Key Setup', 'Education', 'manage_options', 'srp_education', 'srp_show_menu');
+
 	add_submenu_page(__FILE__, 'Yelp', 'Yelp', 'manage_options', 'srp_yelp', 'srp_show_menu');
 	add_submenu_page(__FILE__, 'Walk Score<sup>&reg;</sup>', 'Walk Score<sup>&reg;</sup>', 'manage_options', 'srp_walkscore', 'srp_show_menu');
 	add_submenu_page(__FILE__, 'Google Maps', 'Google Maps', 'manage_options', 'srp_gmap', 'srp_show_menu');
@@ -98,23 +103,12 @@ function _default_settings_MortgageCalc(){
 	return $options;
 }
 
-//get_option substitute to use inside WP_Widget class
-function srp_get_option($option, $instance = null){
-    $mortgage_rates_options = get_option('srp_mortgage_rates');
-        /*--BEGIN return zillow rate--*/
-        if($option == 'annual_interest_rate'){
-                if($mortgage_rates_options['use_rates_in_calcs'] && $mortgage_rates_options['getratesummary_api_key']){
-                        $rate = srp_get_zillow_mortgage_rates($return_rate = true);
-                        if($rate){
-                                add_filter('widget', 'srp_mortgage_rates_branding',9);
-                                return $rate;
-                        }
-                }
-        }elseif($instance != null){
-            return $instance;
-        }
-        /*--END return zillow rate--*/
-        return;
+/** Deprecated function */
+function srp_get_option($option, $instance = null)
+{
+    _deprecated_function(__FUNCTION__, '1.4.5', null);
+
+    return;
 }
 
 function srp_updated_message($updated = false){

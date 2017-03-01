@@ -11,6 +11,7 @@
 require_once( dirname( dirname(__FILE__) ) .'/includes/srp-wp-load.php');
 require_once(dirname( dirname(__FILE__) ) .'/includes/srp-tinymce-widgets.php');
 
+$options = get_option('srp_mortgage_calc_options');
 global $wpdb;
 
 // check for rights
@@ -147,16 +148,6 @@ if ( !is_user_logged_in() || !current_user_can('edit_posts') )
 					<option selected="selected" value="mortgage">Mortgage Calculator</option>
 					<option value="afford">Affordability Calculator</option>
 					<option value="closing">Closing Cost Estimator</option>
-                    <?php
-                    $opt = get_option('srp_mortgage_rates');
-
-                    if (isset($opt['getratesummary_api_key']) && !empty($opt['getratesummary_api_key']))
-                    {
-                        ?>
-                        <option value="rates">Mortgage Rates</option>
-                        <?php
-                    }
-                    ?>
 				</select>
 			</div></td>
 		  </tr>
@@ -175,7 +166,7 @@ if ( !is_user_logged_in() || !current_user_can('edit_posts') )
 		  </tr>
 		  <tr>
 			<td>Interest Rate </td>
-			<td><input name="textfield2" type="text" size="10" class="interest_rate">
+			<td><input name="textfield2" type="text" size="10" class="interest_rate" value="<?php echo $options['annual_interest_rate']; ?>">
 			  %</td>
 		  </tr>		  
 		  <tr>
@@ -218,7 +209,7 @@ if ( !is_user_logged_in() || !current_user_can('edit_posts') )
 
           <tr>
             <td width="130">Interest Rate </td>
-            <td width="190"><input name="textfield23" type="text" size="10" class="interest_rate">
+            <td width="190"><input name="textfield23" type="text" size="10" class="interest_rate" value="<?php echo $options['annual_interest_rate']; ?>">
               %</td>
           </tr>
 

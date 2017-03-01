@@ -30,6 +30,7 @@ class srp_MortgageCalc extends WP_Widget {
 		$price_of_home = (isset($instance['price_of_home']) && !empty($instance['price_of_home'])) ? $instance['price_of_home'] : null;
 		$down_payment = (isset($instance['down_payment']) && !empty($instance['down_payment'])) ? $instance['down_payment'] : null;
 		$mortgage_term = (isset($instance['mortgage_term']) && !empty($instance['mortgage_term'])) ? $instance['mortgage_term'] : null;
+        $interest_rate = (isset($instance['annual_interest_rate']) && !empty($instance['annual_interest_rate'])) ? $instance['annual_interest_rate'] : null;
 
 		//check widget-related variables
 		//since we allow to embed widgets into content where these vars don't exist
@@ -41,11 +42,7 @@ class srp_MortgageCalc extends WP_Widget {
 		$title = apply_filters('srp_MortgageCalc', empty($instance['title']) ? '' : $instance['title']);
 		if ( !empty( $title ) ) { $title = $before_title . $title . $after_title; }
 
-		$interest_rate = ( $interest_rate ) ?
-				$interest_rate :
-				(isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ?
-						srp_get_option('annual_interest_rate', $instance['interest_rate']) :
-						null;
+
 
 		if(isset($instance['width']) && !empty($instance['width'])){ $width = 'style="width:'.$instance['width'].'px"'; }
 
@@ -154,8 +151,7 @@ class srp_AffordabilityCalc extends WP_Widget {
             $width = 'style="width:'.$instance['width'].'px"';
         }
 
-                $_rate = (isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ? $instance['interest_rate'] : null;
-                $interest_rate = srp_get_option('annual_interest_rate', $_rate);
+                $interest_rate = (isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ? $instance['interest_rate'] : null;
 
                 if(!$options = get_option('srp_mortgage_calc_options')){
                     $options = _default_settings_MortgageCalc();
@@ -459,79 +455,18 @@ class srp_MortgageRates extends WP_Widget {
 	}
 }
 
-function srp_get_zillow_mortgage_rates($return_rate = false, $width = '100%'){
-    $opt = get_option('srp_mortgage_rates');
-	$ZWSID = $opt['getratesummary_api_key'];
-	$state = $opt['getratesummary_state'];
 
-	$url = "http://www.zillow.com/webservice/GetRateSummary.htm?zws-id=";
-
-	if($state){
-		$request_url = $url.$ZWSID.'&state='.$state;
-	}else{
-		$request_url = $url.$ZWSID;
-	}
-
-	$xml = srp_wp_http_xml($request_url);
-
-	if($xml->message->code != 0){
-		exit($xml->message->text);
-	}else{
-		$loan_types = array(
-			'30 Year Fixed',
-			'15 Year Fixed',
-			'5/1 ARM',
-		);
-		$srp_display_rates = $opt['display_rates'];
-
-		$output = '
-		<div class="simpleMortgageCalcwidget" style="width: ' . $width . '">
-		<table class="srp_table">';
-
-		if($srp_display_rates == 1){
-			$output .= '<tr>
-							<td>&nbsp;</td>
-							<td><div align="right">Today</div></td>
-							<td><div align="right">Last Week</div></td>
-						</tr>';
-		}
-
-		foreach($loan_types as $k => $v){
-
-				if($xml->response->today->rate[$k] > $xml->response->lastWeek->rate[$k]){
-					$change = ' class="srp_rte_up"';
-				}else{
-					$change = ' class="srp_rte_down"';
-				}
-
-			$output .='
-			<tr>
-				<td>' . $v . '</td>
-				<td class="srp_mrtg_rte"><span'. $change .'>' . number_format( (float) $xml->response->today->rate[$k], 2 ) . '%</span></td>';
-				//Do not show change (up/down) for the last week rates, since we have nothng to compare to.
-                                if($srp_display_rates == 1){
-					$output .= '<td class="srp_mrtg_rte"><span>' . number_format( (float) $xml->response->lastWeek->rate[$k], 2 ) . '%</span></td>';
-				}
-			$output .= '</tr>';
-		}
-
-		  $output .='
-		  <tr>
-			<td colspan="3">
-				' . srp_mortgage_rates_branding() . '
-			</td>
-		  </tr>
-		</table>
-		</div>';
-
-		//add disclaimer to the footer
-		add_action('srp_footer_disclaimers', 'srp_zillow_disclaimer');
-
-		if($return_rate){
-			return $xml->response->today->rate[0];
-		}
-		return $output;
-	}
+/**
+ * Deprecated due to Zillow discontinuing the Mortgage API
+ *
+ * @param bool $return_rate
+ * @param string $width
+ *
+ * @return mixed
+ */
+function srp_get_zillow_mortgage_rates($return_rate = false, $width = '100%')
+{
+    return;
 }
 
 function srp_zillow_disclaimer(){
@@ -641,10 +576,7 @@ function srp_rentometer_disclaimer(){
 add_action('widgets_init', create_function('', 'return register_widget("srp_MortgageCalc");'));
 add_action('widgets_init', create_function('', 'return register_widget("srp_AffordabilityCalc");'));
 add_action('widgets_init', create_function('', 'return register_widget("srp_ClosingCosts");'));
-$mortgage_rates_options = get_option('srp_mortgage_rates');
-if($mortgage_rates_options['getratesummary_api_key']){
-	add_action('widgets_init', create_function('', 'return register_widget("srp_MortgageRates");'));
-}
+
 if(get_option('srp_rentometer_api_key')){
 	add_action('widgets_init', create_function('', 'return register_widget("srp_RentMeter");'));
 }

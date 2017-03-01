@@ -1,13 +1,13 @@
 <?php
 $output = false;
 
-if($_GET['type'] == 'affordability'){
+if($_POST['type'] == 'affordability'){
 
 	// Get Posted Values
-	$mo_gross_income		= $_GET['mo_gross_income'];
-	$mo_debt_expences		= $_GET['mo_debt_expences'];
-	$down_payment   		= $_GET['down_payment'];
-	$annual_interest_rate 	= $_GET['interest_rate'];
+	$mo_gross_income		= $_POST['mo_gross_income'];
+	$mo_debt_expences		= $_POST['mo_debt_expences'];
+	$down_payment   		= $_POST['down_payment'];
+	$annual_interest_rate 	= $_POST['interest_rate'];
 
 	$front_end_ratio_payment	= $mo_gross_income * 0.28;
 	$funds_available			= $mo_gross_income*0.36 - $mo_debt_expences;

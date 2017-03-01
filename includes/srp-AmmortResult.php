@@ -45,11 +45,11 @@
     
     // If HTML headers have not already been sent, we'll print some here    
     if (!headers_sent()) {
-        print("<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'><HTML>");
-        print("<head><title>Mortgage Calculator</title></HEAD><BODY>");
-        print("<body bgcolor='#ffffff'>");
-        print("<h2><span>Mortgage Amortization Schedule</span></h2>");
-        $print_footer = TRUE;
+//        print("<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'><HTML>");
+//        print("<head><title>Mortgage Calculator</title></HEAD><BODY>");
+//        print("<body bgcolor='#ffffff'>");
+//        print("<h2><span>Mortgage Amortization Schedule</span></h2>");
+//        $print_footer = TRUE;
     } else {
        $print_footer = FALSE;
     }
@@ -135,7 +135,7 @@
         $denom = pow((1 + $monthly_interest_rate), $power);
         $monthly_payment = $principal * ($monthly_interest_rate / (1 - $denom));
         
-        print("<a name=\"amortization\"></a>Amortization For Monthly Payment: <b>\$" . number_format($monthly_payment, "2", ".", ",") . "</b> over " . $year_term . " years<br>\n");
+        print("<div><a name=\"amortization\"></a>Amortization For Monthly Payment: <b>\$" . number_format($monthly_payment, "2", ".", ",") . "</b> over " . $year_term . " years</div>\n");
         print("<table cellpadding=\"5\" cellspacing=\"0\" width=\"100%\" id=\"amortization-table\">\n");
         
         // This LEGEND will get reprinted every 12 months

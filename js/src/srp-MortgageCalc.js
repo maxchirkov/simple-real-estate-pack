@@ -33,6 +33,8 @@ jQuery(document).ready(function(){
 		srp_ClosingCosts_calculate(num);
 	});
 
+	jQuery('<div id="srp-dialog"><div id="srp-dialog-content"></div></div>').appendTo('body');
+
 	//BEGIN check pre-filled values
 	srp_check_prefilled();
 	//END check pre-filled values
@@ -144,20 +146,55 @@ function srp_MortgageCalc_calculate(num){
 											"<div>Mo. Home Insurance:	" + srp_cl(monthly_insurance) + "</div>" +
 											"<div>Mo. PMI:				" + srp_cl(monthly_pmi) + "</div>";
 
-		//alert("Monthly Payments: " + monthly_payments);
-		var query = "?form_complete=1&sale_price="+ price_of_home + "&down_percent=" + down_payment + "&year_term=" + mortgage_term + "&annual_interest_percent=" + interest_rate + "&show_progress=1";
-		var thickbox = "&height=500&width=650";
-		var ammortization = "<a href=\"" + srp.srp_inc + "/srp-AmmortResult.php" + query + thickbox + "\" class=\"thickbox\" title=\"Mortgage Amortization Schedule\">Amortization Schedule</a>";
+		var params = {
+            form_complete: 1,
+            sale_price: price_of_home,
+            down_percent: down_payment,
+            year_term: mortgage_term,
+            annual_interest_percent: interest_rate,
+            show_progress: 1
+        };
+
+		var ammortization = jQuery('<a href="#" title="Mortgage Amortization Schedule">Amortization Schedule</a>')
+			.css('cursor', 'pointer')
+			.data(params)
+			.on('click', function(e)
+			{
+				e.preventDefault();
+				e.stopPropagation();
+
+				var data = {
+					action: 'srp_getAmortizationSchedule',
+					params: jQuery(this).data()
+				};
+
+				jQuery.post(srp.ajaxurl, data, function(response)
+				{
+					if (response)
+					{
+						jQuery('#srp-dialog-content').html(response);
+
+						setTimeout(function(){
+                            tb_show('Mortgage Amortization Schedule',
+                                    '#TB_inline?&height=500&width=650&inlineId=srp-dialog-content',
+                                    null);
+						}, 50);
+					}
+				});
+			});
 
 
 		var additional_info	=	additional_charges_text +
 								"<div>Down Payment:		" + srp_cl(down_payment_amount) + "</div>" +
 								"<div class='srp_tb srp_bb'>Financed Amount:	" + srp_cl(loan_amount) + "</div>" +
-								"<div class='srp_result_link'>" + ammortization + "</div>";
+								"<div class='srp_result_link'></div>";
+		var additional_info_obj = jQuery(document.createDocumentFragment());
+		additional_info_obj = additional_info_obj.append(additional_info);
+        additional_info_obj.find('.srp_result_link').append(ammortization);
 
 		jQuery("input#widget-srp_mortgagecalc-" + num + "-monthly_payment").val(Math.round((monthly_payments + additional_charges)*100)/100).formatCurrency( {symbol:''});
 		jQuery("input#widget-srp_mortgagecalc-" + num + "-monthly_payment").addClass("total");
-		jQuery("#widget-srp_mortgagecalc-" + num + "-result").html( additional_info ).slideDown("slow").show();
+		jQuery("#widget-srp_mortgagecalc-" + num + "-result").html( additional_info_obj ).slideDown("slow").show();
 		//srp_bindThickBoxEvents();
 	}
 }
@@ -216,19 +253,97 @@ function srp_Affordability_calculate(num){
 
 	/*---------------------------------------*/
 
-	var query = "?type=affordability&mo_gross_income="+ mo_gross_income + "&mo_debt_expences=" + mo_debt_expences + "&down_payment=" + down_payment + '&interest_rate=' + interest_rate;
-	var thickbox = "&height=700&width=600";
-	var result_link = "<a href=\"" + srp.srp_inc + "/srp-AffordabilityResult.php" + query + thickbox + "\" class=\"thickbox\" title=\"Home Morgage Affordability\">View Calculation Details</a>";
+	// var query = "?type=affordability&mo_gross_income="+ mo_gross_income + "&mo_debt_expences=" + mo_debt_expences + "&down_payment=" + down_payment + '&interest_rate=' + interest_rate;
+	// var thickbox = "&height=700&width=600";
+	// var result_link = "<a href=\"" + srp.srp_inc + "/srp-AffordabilityResult.php" + query + thickbox + "\" class=\"thickbox\" title=\"Home Mortgage Affordability\">View Calculation Details</a>";
 
-	var result =	'<div class="srp_bb">You Should Afford: ' + srp_cl(total_amount) + '</div>' +
+    var params = {
+        type: 'affordability',
+        mo_gross_income: mo_gross_income,
+        mo_debt_expences: mo_debt_expences,
+        down_payment: down_payment,
+        interest_rate: interest_rate
+    };
+
+    var affordabilityLink = jQuery('<a href="#" title="Home Mortgage Affordability">View Calculation Details</a>')
+        .css('cursor', 'pointer')
+        .data(params)
+        .on('click', function(e)
+        {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var data = {
+                action: 'srp_getAffordabilityDetails',
+                params: jQuery(this).data()
+            };
+
+            jQuery.post(srp.ajaxurl, data, function(response)
+            {
+                if (response)
+                {
+                    jQuery('#srp-dialog-content').html(response);
+
+                    setTimeout(function(){
+                        tb_show('Home Mortgage Affordability',
+                                '#TB_inline?&height=700&width=600&inlineId=srp-dialog-content',
+                                null);
+                    }, 50);
+                }
+            });
+        });
+
+	var calc = {
+		shouldAfford: function()
+		{
+			if (total_amount < 1)
+				return 0;
+
+			return total_amount;
+		},
+		pmi: function()
+		{
+            if (total_amount < 1)
+                return 0;
+
+            return smaller - deductions;
+		},
+		deductions: function()
+		{
+            if (total_amount < 1)
+                return 0;
+
+            return deductions;
+		},
+		smaller: function()
+		{
+            if (total_amount < 1)
+                return 0;
+
+            return smaller;
+		},
+		link: function()
+		{
+            if (total_amount < 1)
+                return '';
+
+            return affordabilityLink;
+		}
+	}
+
+	var html =	'<div class="srp_bb">You Should Afford: ' + srp_cl(calc.shouldAfford()) + '</div>' +
 					loan_text +
-					'<div>Principal & Interest: ' + srp_cl(smaller - deductions) + '</div>' +
-					'<div>' + pmi_text + ': ' + srp_cl(deductions) + ' </div>' +
-					'<div class="srp_tb srp_bb">Total Payments (mo): ' + srp_cl(smaller) + '</div>' +
-					'<div class="srp_result_link">' + result_link + '</div>';
+					'<div>Principal & Interest: ' + srp_cl(calc.pmi()) + '</div>' +
+					'<div>' + pmi_text + ': ' + srp_cl(calc.deductions()) + ' </div>' +
+					'<div class="srp_tb srp_bb">Total Payments (mo): ' + srp_cl(calc.smaller()) + '</div>' +
+					'<div class="srp_result_link"></div>';
+
+    var fragment = jQuery(document.createDocumentFragment());
+    var affordabilityInfo = fragment.append(html);
+    affordabilityInfo.find('.srp_result_link').append(calc.link());
 
 	if(mo_gross_income > 0 && mo_debt_expences >= 0 && interest_rate > 0){
-		jQuery('#widget-srp_affordabilitycalc-' + num + '-result').html(result).slideDown("slow").addClass("total");
+		jQuery('#widget-srp_affordabilitycalc-' + num + '-result').html(affordabilityInfo).slideDown("slow").addClass("total");
 		//srp_bindThickBoxEvents();
 	}
 }

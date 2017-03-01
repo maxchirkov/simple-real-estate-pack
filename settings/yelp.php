@@ -14,10 +14,10 @@ class srp_YelpSettings
 	{
 		$options = (array) get_option(self::OPTIONSHANDLE);
 
-		$this->consumerKey 		= isset($options) ? $options['consumer_key'] : null;
-		$this->consumerSecret 	= isset($options) ? $options['consumer_secret'] : null;
-		$this->token 			= isset($options) ? $options['token'] : null;
-		$this->tokenSecret 		= isset($options) ? $options['token_secret'] : null;
+		$this->consumerKey 		= isset($options['consumer_key']) ? $options['consumer_key'] : null;
+		$this->consumerSecret 	= isset($options['consumer_secret']) ? $options['consumer_secret'] : null;
+		$this->token 			= isset($options['token']) ? $options['token'] : null;
+		$this->tokenSecret 		= isset($options['token_secret']) ? $options['token_secret'] : null;
 	}
 
 

@@ -615,3 +615,36 @@ function srp_ajax_tinymce(){
     die();
 }
 add_action( 'wp_ajax_srp_tinymce', 'srp_ajax_tinymce' );
+
+
+add_action('wp_ajax_srp_getAmortizationSchedule', 'getAmortizationSchedule');
+add_action('wp_ajax_nopriv_srp_getAmortizationSchedule', 'getAmortizationSchedule');
+
+function getAmortizationSchedule()
+{
+    if (isset($_POST['params']) && !empty($_POST['params']))
+    {
+        $_REQUEST = $_POST['params'];
+        include SRP_INC . '/srp-AmmortResult.php';
+        die();
+    }
+
+    print 'Something went wrong. Failure to calculate Amortization Schedule.';
+    die();
+}
+
+add_action('wp_ajax_srp_getAffordabilityDetails', 'getAffordabilityDetails');
+add_action('wp_ajax_nopriv_srp_getAffordabilityDetails', 'getAffordabilityDetails');
+
+function getAffordabilityDetails()
+{
+    if (isset($_POST['params']) && !empty($_POST['params']))
+    {
+        $_POST = $_POST['params'];
+        include SRP_INC . '/srp-AffordabilityResult.php';
+        die();
+    }
+
+    print 'Something went wrong. Failure to calculate Amortization Schedule.';
+    die();
+}
