@@ -3,15 +3,20 @@ Contributors: maxchirkov
 Donate link: https://www.cancer.org/aspx/Donation/DON_1_Donate_Online_Now.aspx
 Tags: mortgage, mortgage calculator, real estate, realty, widget, plugin, listing, AJAX, homes, neighborhood, schools, yelp, zillow, map, trulia, altos, charts, statistics, real estate market
 Requires at least: 3.0
-Tested up to: 4.6.1
-Stable tag: 1.4.4
+Tested up to: 4.7.2
+Stable tag: 1.4.5
 
 Package of real estate tools and widgets designed specifically for real estate industry blogs and sites.
 
 == Description ==
 Simple Real Estate Pack is a package of real estate tools and widgets designed specifically for real estate industry blogs and web sites. The plugin includes mortgage and home affordability calculators, closing cost estimator, live mortgage rates, Trulia and ALTOS statistical charts, local schools, business listings from Yelp and Google Maps. Optionally, Simple Real Estate Pack can function as an extension for Great Real Estate (GRE) plugin, and will add new features to the GRE if it's installed. Take a look at live example of this functionality at [ScottsdaleHomes.com](http://www.scottsdalehomes.com/properties/kierland-greens-condo/).
 
-**IMPORTANT: Schools tab in Neighborhood profile currently returns no data due to API deprecation from Education.com**
+**DEPRECATED FEATURES**
+
+* Schools tab in Neighborhood profile currently returns no data due to API discontinuation from Education.com.
+* Mortgage Rates - API is discontinued by Zillow.
+* Trulia Market Charts - Trulia no longer provides them. Please use the Altos charts instead.
+
 
 **API data on businesses, schools and real estate statistics is not available outside of the US.**
 
@@ -24,19 +29,17 @@ Simple Real Estate Pack is a package of real estate tools and widgets designed s
 
 2. Schools - shortcode widget provides a list of schools within selected location (via Education.com API). Can group schools by type, grade level, school district or zip code.
 
-3. Live Mortgage Rates via Zillow API (widget and shortcode).
+3. Market trends and statistical graphs/charts via ALTOS Research.
 
-4. Market trends and statistical graphs/charts via Trulia.com and ALTOS Research.
+4. Embed Google Maps with a click of a mouse with grocery stores, restaurants, gas stations, banks, golf courses and hospitals (optional) within 3 mile radius of the main marker (via Yelp API).
 
-5. Embed Google Maps with a click of a mouse with grocery stores, restaurants, gas stations, banks, golf courses and hospitals (optional) within 3 mile radius of the main marker (via Yelp API).
+5. Publish Yelp listings (shortcode) within 3 mile radius from a specified point into you content. Grouped with tabs by business type (i.e. grocery stores, restaurants etc.).
 
-6. Publish Yelp listings (shortcode) within 3 mile radius from a specified point into you content. Grouped with tabs by business type (i.e. grocery stores, restaurants etc.).
+6. Walk Score via Walkscore.com
 
-7. Walk Score via Walkscore.com
+7. Extension of GRE plugin (optional) via Neighborhood Profile options - mapping local grocery stores, restaurants, gas stations, banks, golf courses and hospitals within 3 mile radius of the property. Includes property location, contact information, ratings via Yelp API., as well as financial tools and statistical charts.
 
-8. Extension of GRE plugin (optional) via Neighborhood Profile options - mapping local grocery stores, restaurants, gas stations, banks, golf courses and hospitals within 3 mile radius of the property. Includes property location, contact information, ratings via Yelp API., as well as financial tools and statistical charts.
-
-9. Easy to use API for third party widget integration into the Neighborhood Profiles.
+8. Easy to use API for third party widget integration into the Neighborhood Profiles.
 
 For detailed usage instructions visit the [official site](http://www.phoenixhomes.com/tech/simple-real-estate-pack "Simple Real Estate Pack by PhoenixHomes.com").
 
@@ -217,6 +220,10 @@ Clear your browser cache and reload the page.
 **If something doesn't work, please try to troubleshoot the issue by checking is any JavaScript errors are reported. Also, try disabling other plugins and leave the SRP enabled just to make sure there are no conflicts.**
 
 == Changelog ==
+
+**Version 1.4.5**
+- Deprecates Mortgage Rates due to discontinuation of the API by Zillow.
+- Fixes negative results in the Affordability Calculator.
 
 **Version 1.4.4**
 - Adds support for Yelp API 2.0
