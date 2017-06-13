@@ -143,7 +143,7 @@
         $legend .= "\t\t<td><b>Month</b></td>\n";
         $legend .= "\t\t<td><b>Interest Paid</b></td>\n";
         $legend .= "\t\t<td><b>Principal Paid</b></td>\n";
-        $legend .= "\t\t<td><b>Remaing Balance</b></td>\n";
+        $legend .= "\t\t<td><b>Remaining Balance</b></td>\n";
         $legend .= "\t</tr>\n";
         
         echo $legend;

@@ -39,6 +39,11 @@ jQuery(document).ready(function(){
 	srp_check_prefilled();
 	//END check pre-filled values
 
+
+    jQuery(document).on( 'tb_opened', function() {
+    	console.log('opened');
+        srp_tb_position();
+        });
 });
 
 /**
@@ -78,12 +83,23 @@ function srp_removeThickBoxEvents() {
 }
 
 function srp_bindThickBoxEvents() {
-        srp_removeThickBoxEvents();
-        //tb_closeImage = tmp_tb_closeImage;
-		//tb_pathToImage = tmp_tb_pathToImage;
+	srp_removeThickBoxEvents();
+	//tb_closeImage = tmp_tb_closeImage;
+	//tb_pathToImage = tmp_tb_pathToImage;
 		tb_init('a.thickbox, area.thickbox, input.thickbox');
 }
 
+function srp_tb_position()
+{
+    if(TB_WIDTH > jQuery(window).width()) 
+    {
+        jQuery("#TB_window").css({marginLeft: 0, marginTop: 0, width: '100%', left: 0,  top:0, height:'100%'});
+        jQuery("#TB_ajaxContent, #TB_iframeContent").css({width: '100%', height: '100%', paddingBottom: '29px'});
+        jQuery("#TB_closeWindowButton").css({fontSize: '24px', marginRight: '5px'});
+    }
+    else
+        jQuery("#TB_window").css({marginLeft: '-' + parseInt((TB_WIDTH / 2),10) + 'px', width: TB_WIDTH + 'px'});
+}
 
 function srp_MortgageCalc_calculate(num){
 	jQuery("#srp_mortgagecalc-" + num + " div.additional-info").hide();
@@ -178,6 +194,8 @@ function srp_MortgageCalc_calculate(num){
                             tb_show('Mortgage Amortization Schedule',
                                     '#TB_inline?&height=500&width=650&inlineId=srp-dialog-content',
                                     null);
+                            trigger_tb_opened();
+
 						}, 50);
 					}
 				});
@@ -288,6 +306,7 @@ function srp_Affordability_calculate(num){
                         tb_show('Home Mortgage Affordability',
                                 '#TB_inline?&height=700&width=600&inlineId=srp-dialog-content',
                                 null);
+                        trigger_tb_opened();
                     }, 50);
                 }
             });
@@ -394,4 +413,9 @@ function srp_cl(nStr){
 		x1 = x1.replace(rgx, '$1' + ',' + '$2');
 	}
 	return '<span class="srp_amnt">$' + (x1+x2) + '</span>';
+}
+
+function trigger_tb_opened()
+{
+	jQuery(document).trigger('tb_opened');
 }
