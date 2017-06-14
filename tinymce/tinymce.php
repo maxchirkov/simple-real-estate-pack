@@ -12,7 +12,7 @@ class add_SRP_button {
 	var $space_before;
 	var $space_after;
 	
-	function add_SRP_button()  {
+	function __construct()  {
 		// Modify the version when tinyMCE plugins are changed.
 		add_filter('tiny_mce_version', array (&$this, 'change_tinymce_version') );
 		

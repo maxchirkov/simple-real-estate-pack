@@ -5,7 +5,7 @@
 **---------------------------------------------*/
 class srp_MortgageCalc extends WP_Widget {
 
-	function srp_MortgageCalc() {
+	function __construct() {
 		$widget_ops = array('classname' => 'srp_MortgageCalc', 'description' => __('Mortgage Calculator Widget'));
 		$control_ops = array('width' => 280);
 		parent::__construct('srp_MortgageCalc', __('[SRP] Mortgage Calculator'), $widget_ops, $control_ops);
@@ -121,7 +121,7 @@ class srp_MortgageCalc extends WP_Widget {
 **---------------------------------------------*/
 class srp_AffordabilityCalc extends WP_Widget {
 
-	function srp_AffordabilityCalc() {
+	function __construct() {
 		$widget_ops = array('classname' => 'srp_AffordabilityCalc', 'description' => __('Affordability Calculator Widget'));
 		$control_ops = array('width' => 280);
 		parent::__construct('srp_AffordabilityCalc', __('[SRP] Affordability Calculator'), $widget_ops, $control_ops);
@@ -239,7 +239,7 @@ class srp_AffordabilityCalc extends WP_Widget {
 **---------------------------------------------*/
 class srp_ClosingCosts extends WP_Widget {
 
-	function srp_ClosingCosts() {
+	function __construct() {
 		$widget_ops = array('classname' => 'srp_ClosingCosts', 'description' => __('Closing Cost Estimator'));
 		$control_ops = array('width' => 280);
 		parent::__construct('srp_ClosingCosts', __('[SRP] Closing Cost Estimator'), $widget_ops, $control_ops);
@@ -400,7 +400,7 @@ class srp_ClosingCosts extends WP_Widget {
 **---------------------------------------------*/
 class srp_MortgageRates extends WP_Widget {
 
-	function srp_MortgageRates() {
+	function __construct() {
 		$widget_ops = array('classname' => 'srp_MortgageRates', 'description' => __('Mortgage Rates by Zillow'));
 		$control_ops = array('width' => 280);
 		parent::__construct('srp_MortgageRates', __('[SRP] Mortgage Rates'), $widget_ops, $control_ops);
@@ -492,7 +492,7 @@ function mortgage_branding($content){
 **---------------------------------------------*/
 class srp_RentMeter extends WP_Widget {
 
-	function srp_RentMeter() {
+	function __construct() {
 		$widget_ops = array('classname' => 'srp_RentMeter', 'description' => __('Rental Rates Meter by Rentometer.com'));
 		$control_ops = array('width' => 280);
 		parent::__construct('srp_RentMeter', __('[SRP] Rental Rates Meter'), $widget_ops, $control_ops);

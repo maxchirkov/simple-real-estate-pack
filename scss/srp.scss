@@ -117,7 +117,12 @@ input#ws-go {
 	padding: 3px 10px 3px 0px;
 }
 #TB_ajaxContent {
-    position: relative;
+	position: relative;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+#TB_closeAjaxWindow .screen-reader-text {
+	visibility: hidden;
 }
 .srp_result_table {
 	font-size: 12px; 
