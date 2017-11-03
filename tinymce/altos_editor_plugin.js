@@ -2,7 +2,7 @@
 
 (function() {
 	// Load plugin specific language pack
-	tinymce.PluginManager.requireLangPack('srp_AltosStats');
+	// tinymce.PluginManager.requireLangPack('srp_AltosStats');
 
 	tinymce.create('tinymce.plugins.srp_AltosStats', {
 		/**
@@ -32,9 +32,9 @@
 				image : url + '/altos.png'
 			});
 			// Add a node change handler, selects the button in the UI when a image is selected
-			ed.onNodeChange.add(function(ed, cm, n) {
-				cm.setActive('srp_AltosStats', n.nodeName == 'IMG');
-			});
+			// ed.onNodeChange.add(function(ed, cm, n) {
+			// 	cm.setActive('srp_AltosStats', n.nodeName == 'IMG');
+			// });
 		},
 		/**
 		 * Creates control instances based in the incomming name. This method is normally not
