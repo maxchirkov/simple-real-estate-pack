@@ -443,7 +443,7 @@ function states_select($name, $id_ = null, $class_ = null)
         -->
     </style>
 </head>
-<body id="link" onload="tinyMCEPopup.executeOnLoad('init();');document.body.style.display='';"
+<body id="link" nload="tinyMCEPopup.executeOnLoad('init();');document.body.style.display='';"
       style="display: none">
 <!-- <form onsubmit="insertLink();return false;" action="#"> -->
 <form name="simpleAPIsForm" action="#">

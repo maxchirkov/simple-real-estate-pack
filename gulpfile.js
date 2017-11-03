@@ -23,7 +23,7 @@ var banner  = ['/**<%= pkg.name %>',
 //////////////////////////////////////////////////////////////////////
 
 
-gulp.task('sass', function (){
+gulp.task('styles', function (){
     gulp.src('scss/*.scss')                    // Build Our Stylesheet
         .pipe(sass({style: 'compressed', errLogToConsole: true, sourceComments: 'map',
                            sourceMap: 'scss'}))  // Compile scss
@@ -35,7 +35,7 @@ gulp.task('sass', function (){
     util.log(util.colors.yellow('Sass compiled & minified'));  // Output to terminal
 });
 
-gulp.task('javascript', function() {
+gulp.task('scripts', function() {
     gulp.src('js/src/*.js')
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
@@ -47,8 +47,8 @@ gulp.task('javascript', function() {
 gulp.task('watch', function(){
 
     // Watch and run sass on changes
-    gulp.watch("scss/*.scss", ['sass']);
-    gulp.watch("js/src/*.js", ['javascript']);
+    gulp.watch("scss/*.scss", ['styles']);
+    gulp.watch("js/src/*.js", ['scripts']);
 });
 
-gulp.task('default', ['sass', 'javascript']);
+gulp.task('default', ['styles', 'scripts']);
