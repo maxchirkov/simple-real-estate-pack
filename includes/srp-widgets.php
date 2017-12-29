@@ -25,12 +25,12 @@ class srp_MortgageCalc extends WP_Widget {
 			$options = _default_settings_MortgageCalc();
 		}
 
-		$instance = array_merge((array)$instance, (array)$options);
+		$instance = array_merge((array)$options, (array)$instance);
 
 		$price_of_home = (isset($instance['price_of_home']) && !empty($instance['price_of_home'])) ? $instance['price_of_home'] : null;
 		$down_payment = (isset($instance['down_payment']) && !empty($instance['down_payment'])) ? $instance['down_payment'] : null;
 		$mortgage_term = (isset($instance['mortgage_term']) && !empty($instance['mortgage_term'])) ? $instance['mortgage_term'] : null;
-        $interest_rate = (isset($instance['annual_interest_rate']) && !empty($instance['annual_interest_rate'])) ? $instance['annual_interest_rate'] : null;
+        $interest_rate = (isset($instance['interest_rate']) && !empty($instance['interest_rate'])) ? $instance['interest_rate'] : null;
 
 		//check widget-related variables
 		//since we allow to embed widgets into content where these vars don't exist
