@@ -484,7 +484,7 @@ function srp_gre_the_yelp_content() {
     return;
   if (!function_exists('srp_Yelp_shortcode'))
     return;
-  if (!($content = srp_Yelp_shortcode($atts = array("lat" => $srp_property_values['lat'], "lng" => $srp_property_values['lng'], 'radius' => srp_get_radius('yelp'), 'output' => 'table', 'sortby' => 'distance', 'term' => null, 'num_biz_requested' => null, 'ajax' => null))))
+  if (!($content = srp_Yelp_shortcode($atts = array("location" => $srp_property_values['zip_code'], "lat" => $srp_property_values['lat'], "lng" => $srp_property_values['lng'], 'radius' => srp_get_radius('yelp'), 'output' => 'table', 'sortby' => 'distance', 'term' => null, 'num_biz_requested' => null, 'ajax' => null))))
     return;
 
   return $content;

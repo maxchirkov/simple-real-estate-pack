@@ -1,6 +1,6 @@
 <?php
-define('EDU_API_URL', 'http://api.education.com/service/service.php');
-define('EDU_API_KEY', '65f5fef47d17f7562c88128cae993b11');
+define('EDU_API_URL', null);
+define('EDU_API_KEY', null);
 define('RESF', 'xml');
 
 function srp_education_get_api_key(){
